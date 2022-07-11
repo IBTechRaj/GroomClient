@@ -1,0 +1,33 @@
+
+   .light-gray {
+    /* background-color: #e4e4e4; */
+    background-color: #fbf8f8;
+  }
+  
+  .light-gray:hover {
+    background-color: rgb(99, 222, 227);
+  }
+  
+  .button-panel .light-gray:active {
+    background-color: #693737;
+  }
+  
+  .reserved {
+    background-color: rgb(0, 204, 255);
+  }
+  /* .ff-percent {
+    width: 60%;
+  } */
+ 
+  .row {
+    display: flex;
+    height: 30px;
+    width: 100%;
+  }
+  
+  .col-6{
+      width: 50%
+  }
+  /* .twenty-five-percent {
+    width: 25%;
+  } */
