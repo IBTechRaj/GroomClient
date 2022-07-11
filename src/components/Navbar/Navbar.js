@@ -65,7 +65,8 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
           + "Team GroomWell"
       }
       console.log('signing up', signupData)
-      fetch("http://localhost:3001/signup", {
+      // fetch("http://localhost:3001/signup", {
+        fetch("https://groomserver.herokuapp.com/signup", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +110,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
         .then(() => {
           // console.log('md', signupData);
           const jwt = localStorage.getItem('token')
-          const url = 'http://localhost:3001/contacts'
+          const url = 'https://groomserver.herokuapp.com/contacts'
 
           try {
             const res = axios.post(url, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
@@ -131,7 +132,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
     event.preventDefault();
     console.log('logging')
 
-    fetch("http://localhost:3001/login", {
+    fetch("https://groomserver.herokuapp.com/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -175,7 +176,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
   }
 
   const handleLogout = () => {
-    fetch("http://localhost:3001/logout", {
+    fetch("https://groomserver.herokuapp.com/logout", {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
