@@ -19,8 +19,8 @@ export default function Services(props) {
   const [serviceDuration, setServiceDuration] = useState("")
   const [servicePrice, setServicePrice] = useState("0")
 
-  const serviceDelUrl = 'http://localhost:3001/services/'
-  const serviceGetUrl = `http://localhost:3001/services/${props.salonId}`
+  const serviceDelUrl = 'https://groomserver.herokuapp.com/services/'
+  const serviceGetUrl = `https://groomserver.herokuapp.com/services/${props.salonId}`
   const [serviceData, setServiceData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -50,7 +50,7 @@ export default function Services(props) {
   const handleServiceSubmit = (e) => {
     e.preventDefault();
     console.log('servicesData', service)
-    const url = 'http://localhost:3001/services';
+    const url = 'https://groomserver.herokuapp.com/services';
     axios.post(url, service, {
       headers: { Authorization: `Bearer ${jwt}` },
     })

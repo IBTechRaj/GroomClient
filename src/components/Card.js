@@ -19,7 +19,7 @@ export default function OutlineCard(props) {
   const [loading, setLoading] = useState(true);
 
   const [booking, setBooking] = useState({ apptDate: "", apptTime: "" })
-  const servicesUrl = 'http://localhost:3001/services/';
+  const servicesUrl = 'https://groomserver.herokuapp.com/services/';
 
   const filteredServices = (services) => {
     const curServ = services.filter(

@@ -18,7 +18,7 @@ function Landing(props) {
   const { userId, userName, userEmail } = props
   const [salons, setSalons] = useState([])
   const classes = useStyles()
-  const salonurl = 'http://localhost:3001/salons';
+  const salonurl = 'https://groomserver.herokuapp.com/salons';
 
   useEffect(() => {
     axios.get(salonurl,

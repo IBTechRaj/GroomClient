@@ -22,8 +22,8 @@ export default function EditSalon(props) {
   const [salonId, setSalonId] = useState(0)
   console.log('SalonDat', salonData)
 
-  const salonurl = `http://localhost:3001/salons/${props.salonId}`;
-  const userSalonUrl = `http://localhost:3001/salons/${props.salonId}`;
+  const salonurl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
+  const userSalonUrl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
 
   useEffect(() => {
     const getUserSalon = async () => {

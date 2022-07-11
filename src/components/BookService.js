@@ -95,7 +95,7 @@ export default function Elevation(props) {
     }
     console.log('appt data', appointment)
     const jwt = localStorage.getItem('token');
-    const apptUrl = 'http://localhost:3001/appointments';
+    const apptUrl = 'https://groomserver.herokuapp.com/appointments';
 
     axios.post(apptUrl, appointment, {
       headers: { Authorization: `Bearer ${jwt}` },
@@ -107,7 +107,7 @@ export default function Elevation(props) {
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const url = 'http://localhost:3001/contacts'
+        const url = 'https://groomserver.herokuapp.com/contacts'
 
         try {
           const res = axios.post(url, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
@@ -120,7 +120,7 @@ export default function Elevation(props) {
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const url = 'http://localhost:3001/contacts'
+        const url = 'https://groomserver.herokuapp.com/contacts'
 
         try {
           const res = axios.post(url, emailSpData, { headers: { Authorization: `Bearer ${jwt}` } });

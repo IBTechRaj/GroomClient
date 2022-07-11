@@ -59,7 +59,7 @@ function SpLogin(props) {
       }
 
       console.log('Sp signing up', signupData)
-      fetch("http://localhost:3001/signup", {
+      fetch("https://groomserver.herokuapp.com/signup", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +99,7 @@ function SpLogin(props) {
           setSpId(cur_user_id)
           console.log('sp md', signupData);
           const jwt = localStorage.getItem('token')
-          const url = 'http://localhost:3001/contacts'
+          const url = 'https://groomserver.herokuapp.com/contacts'
 
           try {
             const res = axios.post(url, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
@@ -120,7 +120,7 @@ function SpLogin(props) {
     event.preventDefault();
     console.log('Sp logging')
 
-    fetch("http://localhost:3001/login", {
+    fetch("https://groomserver.herokuapp.com/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -164,7 +164,7 @@ function SpLogin(props) {
   }
 
   const handleSpLogout = () => {
-    fetch("http://localhost:3001/logout", {
+    fetch("https://groomserver.herokuapp.com/logout", {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
