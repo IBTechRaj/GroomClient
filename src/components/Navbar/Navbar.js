@@ -65,8 +65,8 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
           + "Team GroomWell"
       }
       console.log('signing up', signupData)
-      // fetch("http://localhost:3001/signup", {
-        fetch("https://groomserver.herokuapp.com/signup", {
+      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/signup` : `http://localhost:3001/signup`
+      fetch(signUpUrl, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -110,10 +110,11 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
         .then(() => {
           // console.log('md', signupData);
           const jwt = localStorage.getItem('token')
-          const url = 'https://groomserver.herokuapp.com/contacts'
+          const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/contacts`
+            : `http://localhost:3001/contacts`
 
           try {
-            const res = axios.post(url, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
+            const res = axios.post(contactsUrl, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
             console.log('res', res);
           }
           catch (error) {
@@ -130,9 +131,10 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
-    console.log('logging')
-
-    fetch("https://groomserver.herokuapp.com/login", {
+    console.log('logging', (process.env.REACT_APP_SERVER))
+    const loginUrl = (process.env.REACT_APP_SERVER ? `https://groomserver.herokuapp.com/login` : `http://localhost:3001/login`)
+    console.log('url', loginUrl)
+    fetch(loginUrl, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -169,14 +171,15 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
           alert('It seems you are registered as Service Provider. To avail booking services, please register as Client or Call Customer Care')
           setLoggedIn(false)
         }
-
       })
       .then((json) => console.dir(json))
       .catch((err) => console.error(err));
   }
 
   const handleLogout = () => {
-    fetch("https://groomserver.herokuapp.com/logout", {
+    const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/logout`
+      : `http://localhost:3001/logout`
+      fetch(logoutUrl, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

@@ -89,7 +89,9 @@ export default function Salons(props) {
     console.log('salonDaqta', formData)
     const jwt = localStorage.getItem('token');
 
-    fetch('https://groomserver.herokuapp.com/salons', {
+    const salonsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/salons` : `http://localhost:3001/salons`
+    
+    fetch(salonsUrl, {
       headers: {
         "Authorization": `Bearer ${jwt}`,
         "Accept": "application/json"

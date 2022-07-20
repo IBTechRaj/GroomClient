@@ -18,17 +18,22 @@ export default function Services(props) {
   const [serviceName, setServiceName] = useState("")
   const [serviceDuration, setServiceDuration] = useState("")
   const [servicePrice, setServicePrice] = useState("0")
-
-  const serviceDelUrl = 'https://groomserver.herokuapp.com/services/'
-  const serviceGetUrl = `https://groomserver.herokuapp.com/services/${props.salonId}`
   const [serviceData, setServiceData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
+  const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
+  // const serviceDelUrl = 'https://groomserver.herokuapp.com/services/'
+  // const servicesUrl = `https://groomserver.herokuapp.com/services/${props.salonId}`
+  // const serviceDelUrl = 'http://localhost:3001/services/'
+  // const servicesUrl = `http://localhost:3001/services/${props.salonId}`
+  
+
   const jwt = localStorage.getItem('token');
 
   const getServices = () => {
-    axios.get(serviceGetUrl, {
+    axios.get(servicesUrl, {
       headers: { Authorization: `Bearer ${jwt}` },
     })
       .then(response => {
@@ -50,8 +55,10 @@ export default function Services(props) {
   const handleServiceSubmit = (e) => {
     e.preventDefault();
     console.log('servicesData', service)
-    const url = 'https://groomserver.herokuapp.com/services';
-    axios.post(url, service, {
+
+    // const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
+    
+    axios.post(servicesUrl, service, {
       headers: { Authorization: `Bearer ${jwt}` },
     })
       .then(response => {

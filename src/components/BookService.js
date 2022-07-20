@@ -95,7 +95,8 @@ export default function Elevation(props) {
     }
     console.log('appt data', appointment)
     const jwt = localStorage.getItem('token');
-    const apptUrl = 'https://groomserver.herokuapp.com/appointments';
+    const apptUrl = (process.env.REACT_APP_SERVER ? `https://groomserver.herokuapp.com/appointments` : `http://localhost:3001/appointments`)
+    // const apptUrl = 'https://groomserver.herokuapp.com/appointments';
 
     axios.post(apptUrl, appointment, {
       headers: { Authorization: `Bearer ${jwt}` },
@@ -107,10 +108,11 @@ export default function Elevation(props) {
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const url = 'https://groomserver.herokuapp.com/contacts'
+        const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+        // const contactsUrl = 'https://groomserver.herokuapp.com/contacts'
 
         try {
-          const res = axios.post(url, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
+          const res = axios.post(contactsUrl, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
           console.log('res', res);
         }
         catch (error) {
@@ -120,10 +122,11 @@ export default function Elevation(props) {
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const url = 'https://groomserver.herokuapp.com/contacts'
+        const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+        // const contactsUrl = 'https://groomserver.herokuapp.com/contacts'
 
         try {
-          const res = axios.post(url, emailSpData, { headers: { Authorization: `Bearer ${jwt}` } });
+          const res = axios.post(contactsUrl, emailSpData, { headers: { Authorization: `Bearer ${jwt}` } });
           console.log('res', res);
           props.setBookingVisible(false)
         }

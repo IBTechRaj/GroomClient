@@ -19,7 +19,9 @@ export default function OutlineCard(props) {
   const [loading, setLoading] = useState(true);
 
   const [booking, setBooking] = useState({ apptDate: "", apptTime: "" })
-  const servicesUrl = 'https://groomserver.herokuapp.com/services/';
+  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
+  // const servicesUrl = 'http://localhost:3001/services/';
+  // const servicesUrl = 'https://groomserver.herokuapp.com/services/';
 
   const filteredServices = (services) => {
     const curServ = services.filter(
@@ -29,6 +31,9 @@ export default function OutlineCard(props) {
   }
 
   const handleBooking = () => {
+    if (!userName)
+      alert('Please login to book your appointment')
+    else
     setBookingVisible(true)
   }
 

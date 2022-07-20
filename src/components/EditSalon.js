@@ -22,8 +22,11 @@ export default function EditSalon(props) {
   const [salonId, setSalonId] = useState(0)
   console.log('SalonDat', salonData)
 
-  const salonurl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
-  const userSalonUrl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
+  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/${props.salonId}` : `http://localhost:3001/${props.salonId}`
+
+  const userSalonUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/${props.salonId}` : `http://localhost:3001/${props.salonId}`
+  // const salonurl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
+  // const userSalonUrl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
 
   useEffect(() => {
     const getUserSalon = async () => {
@@ -56,7 +59,7 @@ export default function EditSalon(props) {
   const updateSalonDetails = (event) => {
     event.preventDefault();
     console.log('sd', salonData)
-    axios.put(salonurl, salonData)
+    axios.put(salonUrl, salonData)
       .then(res => {
         console.log('upd', res.data)
         alert('Salon Details updated successfully')

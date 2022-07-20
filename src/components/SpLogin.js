@@ -59,7 +59,9 @@ function SpLogin(props) {
       }
 
       console.log('Sp signing up', signupData)
-      fetch("https://groomserver.herokuapp.com/signup", {
+      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/signup` : `http://localhost:3001/signup`
+      // fetch("https://groomserver.herokuapp.com/signup", {
+        fetch(signUpUrl, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -99,10 +101,12 @@ function SpLogin(props) {
           setSpId(cur_user_id)
           console.log('sp md', signupData);
           const jwt = localStorage.getItem('token')
-          const url = 'https://groomserver.herokuapp.com/contacts'
+          // const url = 'https://groomserver.herokuapp.com/contacts'
+          const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+          // const contactsUrl = 'http://localhost:3001/contacts'
 
           try {
-            const res = axios.post(url, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
+            const res = axios.post(contactsUrl, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
             console.log('res', res);
           }
           catch (error) {
@@ -120,7 +124,9 @@ function SpLogin(props) {
     event.preventDefault();
     console.log('Sp logging')
 
-    fetch("https://groomserver.herokuapp.com/login", {
+    const loginUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/login` : `http://localhost:3001/login`
+    // fetch("https://groomserver.herokuapp.com/login", {
+      fetch(loginUrl, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -163,8 +169,11 @@ function SpLogin(props) {
       .catch((err) => console.error(err));
   }
 
+  const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/signup` : `http://localhost:3001/signup`
+  
   const handleSpLogout = () => {
-    fetch("https://groomserver.herokuapp.com/logout", {
+    // fetch("https://groomserver.herokuapp.com/logout", {
+      fetch(logoutUrl, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
