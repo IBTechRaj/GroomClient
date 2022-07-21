@@ -169,8 +169,8 @@ function SpLogin(props) {
       .catch((err) => console.error(err));
   }
 
-  const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/signup` : `http://localhost:3001/signup`
-  
+  const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/logout` : `http://localhost:3001/logout`
+
   const handleSpLogout = () => {
     // fetch("https://groomserver.herokuapp.com/logout", {
       fetch(logoutUrl, {

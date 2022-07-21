@@ -23,7 +23,7 @@ export default function Services(props) {
   const [error, setError] = useState(null);
 
   const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
-  const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
+  const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services/` : `http://localhost:3001/services/`
   // const serviceDelUrl = 'https://groomserver.herokuapp.com/services/'
   // const servicesUrl = `https://groomserver.herokuapp.com/services/${props.salonId}`
   // const serviceDelUrl = 'http://localhost:3001/services/'
