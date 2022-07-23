@@ -25,6 +25,7 @@ export default function Services(props) {
 
   const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services/${spSalonId}` : `http://localhost:3001/services/${spSalonId}`
   const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services/` : `http://localhost:3001/services/`
+  const serviceAddUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services/` : `http://localhost:3001/services/`
   // const serviceDelUrl = 'https://groomserver.herokuapp.com/services/'
   // const servicesUrl = `https://groomserver.herokuapp.com/services/${props.salonId}`
   // const serviceDelUrl = 'http://localhost:3001/services/'
@@ -59,7 +60,7 @@ export default function Services(props) {
 
     // const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
     
-    axios.post(servicesUrl, service, {
+    axios.post(serviceAddUrl, service, {
       headers: { Authorization: `Bearer ${jwt}` },
     })
       .then(response => {
