@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function EditSalon(props) {
-
+const { spSalonId, onClose } = props
   console.log('edit props', props)
   const [salonData, setSalonData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -22,9 +22,9 @@ export default function EditSalon(props) {
   const [salonId, setSalonId] = useState(0)
   console.log('SalonDat', salonData)
 
-  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/${props.salonId}` : `http://localhost:3001/${props.salonId}`
+  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/salons/${spSalonId}` : `http://localhost:3001/salons/${spSalonId}`
 
-  const userSalonUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/${props.salonId}` : `http://localhost:3001/${props.salonId}`
+  const userSalonUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/salons/${spSalonId}` : `http://localhost:3001/salons/${spSalonId}`
   // const salonurl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
   // const userSalonUrl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
 

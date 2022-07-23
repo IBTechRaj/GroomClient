@@ -32,9 +32,11 @@ function App() {
       <Carousel />
       <SpLogin spLoggedIn={spLoggedIn} setSpLoggedIn={setSpLoggedIn} client={client} setClient={setClient} spId={spId} setSpId={setSpId} spSalonId={spSalonId} setSpSalonId={setSpSalonId} />
       <Switch>
+        {console.log('s p l', spId, spSalonId, spLoggedIn)}
+        {console.log('ui un ue um', userId, userName,userEmail,userMobile)}
         {client ?
           < Landing userId={userId} userName={userName} userEmail={userEmail} userMobile={userMobile} /> :
-          <Sprovider spLoggedIn={spLoggedIn} setSpLoggedIn={setSpLoggedIn} spId={spId} setSpId={setSpId} client={client} setClient={setClient} salonId={spSalonId} />
+          <Sprovider spId={spId} spSalonId={spSalonId} setSpSalonId={setSpSalonId} />
         }
       </Switch>
       <Footer />

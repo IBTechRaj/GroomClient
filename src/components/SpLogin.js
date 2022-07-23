@@ -6,8 +6,16 @@ import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 
 function SpLogin(props) {
-  const { spLoggedIn, setSpLoggedIn, client, setClient, spId, setSpId, spSalonId, setSpSalonId } = props
+  const { spLoggedIn, setSpLoggedIn,  setClient,  setSpId,  setSpSalonId } = props
+
+  console.log('spLoginProps', props)
   const jwt = localStorage.getItem('token');
+
+  // const [spLoggedIn, setSpLoggedIn]=useState(props.spLoggedIn)
+  // const [client, setClient]=useState(props.client)
+  // const [spId, setSpId] = useState(props.spId)
+  // const [spSalonId, setSpSalonId] = useState(props.spSalonId)
+
   const [click, setClick] = useState(false);
   const [openSpLogin, setOpenSpLogin] = useState(false);
   const [openSpSignup, setOpenSpSignup] = useState(false);
@@ -96,7 +104,13 @@ function SpLogin(props) {
         })
         .then((data) => {
           console.log('d', data)
+
+          let cur_user_salon_id = data.data.salon_ids[0]
+          let cur_user_type = data.data.usertype
+          setSpSalonId(cur_user_salon_id)
           let cur_user_id = data.data.id
+          
+          console.log('id,type,salon', cur_user_id, cur_user_type, cur_user_salon_id)
           console.log('spId', cur_user_id)
           setSpId(cur_user_id)
           console.log('sp md', signupData);
@@ -125,7 +139,6 @@ function SpLogin(props) {
     console.log('Sp logging')
 
     const loginUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/login` : `http://localhost:3001/login`
-    // fetch("https://groomserver.herokuapp.com/login", {
       fetch(loginUrl, {
       method: "post",
       headers: {
@@ -172,7 +185,6 @@ function SpLogin(props) {
   const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/logout` : `http://localhost:3001/logout`
 
   const handleSpLogout = () => {
-    // fetch("https://groomserver.herokuapp.com/logout", {
       fetch(logoutUrl, {
       method: "delete",
       headers: {

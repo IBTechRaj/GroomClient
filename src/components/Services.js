@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function Services(props) {
   console.log('ssser', props)
+  const { spSalonId }=props
   const [serviceName, setServiceName] = useState("")
   const [serviceDuration, setServiceDuration] = useState("")
   const [servicePrice, setServicePrice] = useState("0")
@@ -22,7 +23,7 @@ export default function Services(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
+  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services/${spSalonId}` : `http://localhost:3001/services/${spSalonId}`
   const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services/` : `http://localhost:3001/services/`
   // const serviceDelUrl = 'https://groomserver.herokuapp.com/services/'
   // const servicesUrl = `https://groomserver.herokuapp.com/services/${props.salonId}`
@@ -49,7 +50,7 @@ export default function Services(props) {
     stype: serviceName,
     sduration: serviceDuration,
     sprice: servicePrice,
-    salon_id: props.salonId,
+    salon_id: spSalonId,
   }
 
   const handleServiceSubmit = (e) => {

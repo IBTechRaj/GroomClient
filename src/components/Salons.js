@@ -19,7 +19,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
 export default function Salons(props) {
-
+  const { spId, spSalonId, setSpSalonId, onClose } = props
   console.log('sln props', props)
 
   const [name, setName] = useState("")
@@ -33,7 +33,7 @@ export default function Salons(props) {
   const [gstin, setGstin] = useState("")
   const [pan, setPan] = useState("")
   const [chairs, setChairs] = useState("1")
-  const [salonId, setSalonId] = useState(0)
+  // const [salonId, setSalonId] = useState(0)
   const [salonsBtn, setSalonsBtn] = useState(false)
   const [holiday, setHoliday] = useState(1)
   const [opens, setOpens] = useState(0)
@@ -81,7 +81,7 @@ export default function Salons(props) {
     formData.append('gstin', gstin)
     formData.append('pan', pan)
     formData.append('chairs', chairs)
-    formData.append('user_id', props.spId)
+    formData.append('user_id', spId)
     formData.append('weekday', holiday)
     formData.append('opens', opens)
     formData.append('closes', closes)
@@ -102,8 +102,8 @@ export default function Salons(props) {
       .then((res) => res.json())
       .then((res) => {
         console.log('res', res)
-        setSalonId(res.id)
-        console.log('salon id', salonId)
+        setSpSalonId(res.id)
+        console.log('salon id', spSalonId)
         setSalonsBtn(!salonsBtn)
 
       })
@@ -333,7 +333,7 @@ export default function Salons(props) {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={props.onClose}
+            onClick={onClose}
           >
             Exit
           </Button>

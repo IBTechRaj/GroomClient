@@ -9,12 +9,11 @@ import EditSalon from './EditSalon'
 function Sprovider(props) {
 
   console.log('spro', props)
-  // const { spSalonId } = props;
-  const [salonId, setSalonId] = useState(props.salonId)
+  const { spId, spSalonId , setSpSalonId} = props;
   const [showSalons, setShowSalons] = useState(false)
   const [showServices, setShowServices] = useState(false)
   const [editData, setEditData] = useState(false)
-  console.log('spro2', salonId)
+  console.log('spro2', spSalonId)
 
   const closeChild = () => {
     setShowSalons(false)
@@ -40,7 +39,7 @@ function Sprovider(props) {
 
           <ButtonGroup variant="contained" size="large" aria-label="outlined primary button group">
 
-            {(props.salonId) ?
+            {(spSalonId) ?
               (<Button
                 type="submit"
                 fullWidth
@@ -50,7 +49,8 @@ function Sprovider(props) {
               // disabled={servicesBtn}
               >
                 Edit Salon Details
-              </Button>) :
+              </Button>)
+              :
               (<Button
                 type="submit"
                 fullWidth
@@ -67,7 +67,7 @@ function Sprovider(props) {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, mr: 5, ml: 80 }}
-              // disabled={!salonId}
+              disabled={!spSalonId}
               onClick={() => { setShowServices(true) }}
             >
               Add/Delete Services
@@ -75,13 +75,14 @@ function Sprovider(props) {
 
           </ButtonGroup>
           {showSalons &&
-            <Salons spId={props.spId} setSalonId={setSalonId} client={props.client} setClient={props.setClient} onClose={closeChild} />
+            <Salons spId={spId} spSalonId={spSalonId} setSpSalonId={setSpSalonId}  onClose={closeChild} />
           }
           {showServices &&
-            <Services salonId={(salonId ? salonId : props.salonId)} onClose={closeServices} />
+            <Services spSalonId={spSalonId } onClose={closeServices} />
+            // <Services salonId={(salonId ? salonId : props.salonId)} onClose={closeServices} />
           }
           {editData &&
-            <EditSalon salonId={props.salonId} client={props.client} setClient={props.setClient} onClose={closeEdits} />
+            <EditSalon spSalonId={spSalonId} onClose={closeEdits} />
           }
 
         </Container>

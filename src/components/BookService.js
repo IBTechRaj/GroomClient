@@ -103,6 +103,7 @@ export default function Elevation(props) {
     })
       .then(response => {
         if (response.status === 201) {
+          alert('Your appointment successfully booked')
           console.log('Appointment Added')
         }
       })
