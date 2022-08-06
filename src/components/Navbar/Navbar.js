@@ -12,6 +12,7 @@ import 'react-responsive-modal/styles.css';
 import clsx from "clsx";
 import styles from "./LoginForm.module.css";
 import { useLoginFormValidator } from "./hooks/useLoginFormValidator";
+// import LoginForm from './LoginForm';
 
 const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserName, userEmail, setUserEmail, userMobile, setUserMobile }) => {
   const [click, setClick] = useState(false);
@@ -174,7 +175,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
     const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
     console.log('isvalid', isValid)
     if (!isValid) return;
-    alert(JSON.stringify(form, null, 2));
+    // alert(JSON.stringify(form, null, 2));
 
     if (form.password === form.confirmPassword) {
       const emailData = {
@@ -220,6 +221,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
             return res.json();
           } else {
             console.log('Error signup')
+            alert('Problem signing up')
             onCloseSignupModal()
             throw new Error(res);
           }
@@ -247,7 +249,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
           }
 
         })
-        .catch((err) => console.error(err));
+        .catch((err) => console.log(err));
     }
     else {
       console.log('Passwords should match')
@@ -259,6 +261,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
 
     // const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
+    // console.log('isvalid', isValid)
     // if (!isValid) return;
     // alert(JSON.stringify(form, null, 2));
 
@@ -305,7 +308,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
         }
       })
       .then((json) => console.dir(json))
-      .catch((err) => console.error(err));
+      .catch((err) => alert(err));
   }
 
   const handleLogout = () => {
