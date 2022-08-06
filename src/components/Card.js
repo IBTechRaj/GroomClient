@@ -10,7 +10,7 @@ import axios from 'axios'
 import BookService from './BookService';
 
 export default function OutlineCard(props) {
-  console.log('card props', props)
+  // console.log('card props', props)
   const { salon } = props;
   const { userName } = props
   const [services, setServices] = useState([{}])
