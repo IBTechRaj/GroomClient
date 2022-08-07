@@ -44,7 +44,7 @@
 .myForm input[type="tel"],
 .myForm input[type="password"],
 .myForm input[type="email"],
-.myForm input[type="datetime-local"],
+.myForm input[type="date"],
 .myForm select,
 .myForm textarea {
   float: right;
