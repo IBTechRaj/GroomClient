@@ -1,54 +1,20 @@
-// Form Validation Library : https://www.npmjs.com/package/react-form-input-validation
-// https://www.npmjs.com/package/validatorjs
+// import React from 'react';
 import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap'
 import axios from 'axios';
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 
-import { Lang, useFormInputValidation } from "react-form-input-validation";
-import "./Form.css";
-
 function SpLogin(props) {
-  const { spLoggedIn, setSpLoggedIn, setClient, setSpId, setSpSalonId } = props
+  const { spLoggedIn, setSpLoggedIn,  setClient,  setSpId,  setSpSalonId } = props
 
-  // console.log('spLoginProps', props)
+  console.log('spLoginProps', props)
   const jwt = localStorage.getItem('token');
 
-
-  const [fields, errors, form] = useFormInputValidation(
-    {
-      // customer_name: "",
-      email_address: "",
-      password: "",
-      password_confirmation: "",
-      firstName: "",
-      lastName: "",
-      gender: "",
-      mobile: "",
-      dob: "",
-
-    },
-    {
-      email_address: "required|email",
-      password: "required",
-      password_confirmation: "required|same:password",
-      firstName: "required",
-      lastName: "required",
-      dob: "required|date",
-      mobile: "required|numeric|digits:10",
-      gender: "required",
-    }
-  );
-
-  const onSubmit = async (event) => {
-    const isValid = await form.validate(event);
-    if (isValid) {
-      console.log("MAKE AN API CALL", fields, errors);
-    }
-  };
-
-
+  // const [spLoggedIn, setSpLoggedIn]=useState(props.spLoggedIn)
+  // const [client, setClient]=useState(props.client)
+  // const [spId, setSpId] = useState(props.spId)
+  // const [spSalonId, setSpSalonId] = useState(props.spSalonId)
 
   const [click, setClick] = useState(false);
   const [openSpLogin, setOpenSpLogin] = useState(false);
@@ -73,23 +39,18 @@ function SpLogin(props) {
   const [dob, setDob] = useState('')
 
   const signupData = {
-    "email": fields.email_address,
-    "password": fields.password,
-    "first_name": fields.firstname,
-    "last_name": fields.lastname,
-    "gender": fields.gender,
-    "mobile": fields.mobile,
-    "date_of_birth": fields.dob,
+    "email": email,
+    "password": password,
+    "first_name": firstname,
+    "last_name": lastname,
+    "gender": gender,
+    "mobile": mobile,
+    "date_of_birth": dob,
     "usertype": 1
-
   }
 
   const handleSubmitSpSignup = async (event) => {
     event.preventDefault();
-    const isValid = await form.validate(event);
-    if (isValid) {
-      console.log("MAKE AN API CALL", fields, errors);
-    }
     if (password === passwordConfirmation) {
       const emailData = {
         "subject": 'Service Provider Registration Success!',
@@ -108,20 +69,20 @@ function SpLogin(props) {
       console.log('Sp signing up', signupData)
       const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/signup` : `http://localhost:3001/signup`
       // fetch("https://groomserver.herokuapp.com/signup", {
-      fetch(signUpUrl, {
+        fetch(signUpUrl, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           user: {
-            email: fields.email_address,
-            password: fields.password,
-            first_name: fields.firstname,
-            last_name: fields.lastname,
-            gender: parseInt(fields.gender),
-            mobile: fields.mobile,
-            date_of_birth: fields.dob,
+            email: email,
+            password: password,
+            first_name: firstname,
+            last_name: lastname,
+            gender: gender,
+            mobile: mobile,
+            date_of_birth: dob,
             usertype: 1
           },
         }),
@@ -148,14 +109,15 @@ function SpLogin(props) {
           let cur_user_type = data.data.usertype
           setSpSalonId(cur_user_salon_id)
           let cur_user_id = data.data.id
-
+          
           console.log('id,type,salon', cur_user_id, cur_user_type, cur_user_salon_id)
           console.log('spId', cur_user_id)
           setSpId(cur_user_id)
           console.log('sp md', signupData);
           const jwt = localStorage.getItem('token')
+          // const url = 'https://groomserver.herokuapp.com/contacts'
           const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/contacts` : `http://localhost:3001/contacts`
-
+          // const contactsUrl = 'http://localhost:3001/contacts'
 
           try {
             const res = axios.post(contactsUrl, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
@@ -177,15 +139,15 @@ function SpLogin(props) {
     console.log('Sp logging')
 
     const loginUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/login` : `http://localhost:3001/login`
-    fetch(loginUrl, {
+      fetch(loginUrl, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         user: {
-          email: fields.email_address,
-          password: fields.password,
+          email: email,
+          password: password,
         },
       }),
     })
@@ -214,7 +176,6 @@ function SpLogin(props) {
         if (cur_user_type === 'client') {
           alert('It seems you are registered as Client. To offer your services, please register as Service Provider or Call Customer Care')
           setSpLoggedIn(false)
-          setClient(true)
         }
       })
       .then((json) => console.dir(json))
@@ -224,7 +185,7 @@ function SpLogin(props) {
   const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/logout` : `http://localhost:3001/logout`
 
   const handleSpLogout = () => {
-    fetch(logoutUrl, {
+      fetch(logoutUrl, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -251,195 +212,139 @@ function SpLogin(props) {
       <div>
         <Modal open={openSpLogin} onClose={onCloseSpLoginModal} centre>
           <h2>Salon Owner Login</h2>
-          <form
-            className="myForm"
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmitSpLogin}
-          >
-            <p>
-              <label>
-                Email
-                <input
-                  type="email"
-                  name="email_address"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.email_address}
-                />
-              </label>
-              <label className="error">
-                {errors.email_address ? errors.email_address : ""}
-              </label>
-            </p>
-            <p>
-              <label>
-                Password
-                <input
-                  type="password"
-                  name="password"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.password}
-                />
-              </label>
-              <label className="error">
-                {errors.password ? errors.password : ""}
-              </label>
-            </p>
-
-            <p>
-              <button type="submit">Login</button>
-            </p>
+          <form onSubmit={handleSubmitSpLogin}>
+            <label className="justify-left w-100 px-5">
+              <input
+                className="form-control"
+                placeholder="email"
+                type="text"
+                name="email"
+                value={email}
+                onChange={event => {
+                  setEmail(event.target.value)
+                }}
+              />
+              <br />
+              <input
+                className="form-control"
+                placeholder="password"
+                type="password"
+                name="password"
+                value={password}
+                onChange={event => {
+                  setPassword(event.target.value)
+                }}
+              />
+            </label>
+            <br /><br />
+            <label className="justify-left w-100 px-5">
+              {' '}
+              <input className="w-100 btn btn-custom" type="submit" />
+            </label>
           </form>
         </Modal>
-
         <Modal open={openSpSignup} onClose={onCloseSpSignupModal} centre>
           <h2> Salon Owner Signup</h2>
-          <form
-            className="myForm"
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmitSpSignup}
-          >
-            <p>
+          <form onSubmit={handleSubmitSpSignup}>
+            <label className="justify-left w-100 px-5">
+              Email
+              <input
+                className="form-control"
+                placeholder="email"
+                type="text"
+                name="email"
+                value={email}
+                onChange={event => {
+                  setEmail(event.target.value)
+                }}
+              />
+              Password
+              <input
+                className="form-control"
+                placeholder="password"
+                type="password"
+                name="password"
+                value={password}
+                onChange={event => {
+                  setPassword(event.target.value)
+                }}
+              />
+              Confirm Password
+              <input
+                className="form-control"
+                placeholder="password confirmation"
+                type="password"
+                name="passwordConfirmation"
+                value={passwordConfirmation}
+                onChange={event => {
+                  setPasswordConfirmation(event.target.value)
+                }}
+              />
+              First Name
+              <input
+                className="form-control"
+                placeholder="First Name"
+                type="string"
+                name="firstname"
+                value={firstname}
+                onChange={event => {
+                  setFirstname(event.target.value)
+                }}
+              />
+              Last Name
+              <input
+                className="form-control"
+                placeholder="Last Name"
+                type="string"
+                name="lastName"
+                value={lastname}
+                onChange={event => {
+                  setLastname(event.target.value)
+                }}
+              />
+              Gender
               <label>
-                Email
-                <input
-                  type="email"
-                  name="email_address"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.email_address}
-                />
-              </label>
-              <label className="error">
-                {errors.email_address ? errors.email_address : ""}
-              </label>
-            </p>
-            <p>
-              <label>
-                Password
-                <input
-                  type="password"
-                  name="password"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.password}
-                />
-              </label>
-              <label className="error">
-                {errors.password ? errors.password : ""}
-              </label>
-            </p>
-
-            <p>
-              <label>
-                Confirm Password
-                <input
-                  type="password"
-                  name="password_confirmation"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.password_confirmation}
-                />
-              </label>
-              <label className="error">
-                {errors.password_confirmation ? errors.password_confirmation : ""}
-              </label>
-            </p>
-
-            <p>
-              <label>
-                First Name
-                <input
-                  type="text"
-                  name="firstName"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.firstName}
-                />
-              </label>
-              <label className="error">
-                {errors.firstName ? errors.firstName : ""}
-              </label>
-            </p>
-
-            <p>
-              <label>
-                Last Name
-                <input
-                  type="text"
-                  name="lastName"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.lastName}
-                />
-              </label>
-              <label className="error">
-                {errors.lastName ? errors.lastName : ""}
-              </label>
-            </p>
-
-            <p>
-              <label>
-                Gender
-                <select
-                  id="gender"
-                  name="gender"
-                  value={fields.gender}
-                  onChange={form.handleChangeEvent}
-                  onBlur={form.handleBlurEvent}
+                Your Gender:
+                <select value={gender} onChange={event => {
+                  setGender(parseInt(event.target.value))
+                }}
                 >
-                  <option value="">Select </option>
-                  <option value="0">Female</option>
-                  <option value="1">Male</option>
-                  <option value="2">Other</option>
+                  <option value="0" >She</option>
+                  <option value="1" >He</option>
+                  <option value="2" >Others</option>
                 </select>
               </label>
-              <label className="error">
-                {errors.gender ? errors.gender : ""}
-              </label>
-            </p>
 
-            <p>
-              <label>
-                Date of Birth
-                <input
-                  type="date"
-                  name="dob"
-                  onChange={form.handleChangeEvent}
-                  onBlur={form.handleBlurEvent}
-                  value={fields.dob}
-                />
-              </label>
-              <label className="error">
-                {errors.dob ? errors.dob : ""}
-              </label>
-            </p>
+              Date of Birth
+              <input
+                className="form-control"
+                placeholder="Date of Birth"
+                type="date"
+                name="dob"
+                value={dob}
+                onChange={event => {
+                  setDob(event.target.value)
+                }}
+              />
+              Mobile
+              <input
+                className="form-control"
+                placeholder="Mobile"
+                type="string"
+                name="mopbile"
+                value={mobile}
+                onChange={event => {
+                  setMobile(event.target.value)
+                }}
+              />
+            </label>
 
-            <p>
-              <label>
-                Mobile
-                <input
-                  type="tel"
-                  name="mobile"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.mobile}
-                />
-              </label>
-              <label className="error">
-                {errors.mobile ? errors.mobile : ""}
-              </label>
-            </p>
-
-            <p>
-              <button type="submit">Signup</button>
-            </p>
-          </form>
+            <label className="justify-left w-100 px-5">
+              {' '}
+              <input className="w-100 btn btn-custom" type="submit" />
+            </label>
+          </form >
         </Modal >
-
         <Container className="container " >
           <Row className="row align-middle ">
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
