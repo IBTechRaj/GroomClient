@@ -65,9 +65,12 @@
 }
 
 .myForm button {
-  padding: 0.5em;
+  /* padding: 0.5em; */
   /* border-radius: 0.5em; */
-  background: #eee;
+  padding: 0.25rem 0.25rem;
+  min-width: 60%;
+  background-color: #4e65f5;
+  color: #fff;
   border: none;
   font-weight: bold;
   margin-left: 40%;
