@@ -373,14 +373,14 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link
+                {/* <Link
                   to='/services'
                   className='nav-links'
                   style={{ color: 'black' }}
                   onClick={closeMobileMenu}
                 >
                   Services
-                </Link>
+                </Link> */}
               </li>
               {(loggedIn) ? (
                 <li>
