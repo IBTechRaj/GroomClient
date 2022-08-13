@@ -45,6 +45,9 @@
 .myForm input[type="password"],
 .myForm input[type="email"],
 .myForm input[type="date"],
+.myForm input[type="number"],
+.myForm input[type="time"],
+.myForm input[type="file"],
 .myForm select,
 .myForm textarea {
   float: right;
