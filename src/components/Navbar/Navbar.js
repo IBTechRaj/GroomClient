@@ -269,6 +269,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
     console.log('logging', (process.env.REACT_APP_SERVER))
     const loginUrl = (process.env.REACT_APP_SERVER ? `https://groomserver.herokuapp.com/login` : `http://localhost:3001/login`)
     console.log('url', loginUrl)
+    // console.log('server', process.env.REACT_APP_SERVER )
     fetch(loginUrl, {
       method: "post",
       headers: {
