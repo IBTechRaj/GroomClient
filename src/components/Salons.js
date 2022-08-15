@@ -492,7 +492,7 @@ export default function Salons(props) {
         </p>
       </form>
 
-      <Container component="main" maxWidth="xs">
+      {/* <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -511,7 +511,7 @@ export default function Salons(props) {
             Exit
           </Button>
         </Box>
-      </Container>
+      </Container> */}
     </>
   );
 
