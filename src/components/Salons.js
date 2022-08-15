@@ -16,6 +16,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
+import { Lang, useFormInputValidation } from "react-form-input-validation";
+import "./Form.css";
+
 const theme = createTheme();
 
 export default function Salons(props) {
@@ -41,6 +45,15 @@ export default function Salons(props) {
   const [image, setImage] = useState('')
 
 
+  const onSubmit = async (event) => {
+    const isValid = await form.validate(event);
+    if (isValid) {
+      console.log("MAKE AN API CALL", fields, errors);
+    }
+    console.log('isvalid', isValid)
+  };
+
+
   const onImageChange = (event) => {
     setImage(event.target.files[0])
   }
@@ -64,33 +77,97 @@ export default function Salons(props) {
   // }
 
 
+  const [fields, errors, form] = useFormInputValidation(
+    {
+      // customer_name: "",
+      email: "",
+      // password: "",
+      // password_confirmation: "",
+      // firstName: "",
+      // lastName: "",
+      // gender: "",
+      // mobile: "",
+      // dob: "",
+      name: "",
+      address1: "",
+      address2: "",
+      pincode: "",
+      city: "",
+      landline: "",
+      gst: "",
+      pan: "",
+      chairs: "",
+      opens: "",
+      closes: "",
+      holiday: "",
+      image: ""
 
 
+    },
+    {
+      email: "required|email",
+      // password: "required",
+      // password_confirmation: "required|same:password",
+      // firstName: "required",
+      // lastName: "required",
+      // dob: "required|date",
+      // mobile: "required|numeric|digits:10",
+      // gender: "required",
+      name: "required",
+      address1: "required",
+      address2: "required",
+      pincode: "required|digits:6",
+      city: "required",
+      landline: "",
+      gst: "required|alpha_num:15",
+      pan: "required|alpha_num:10",
+      chairs: "required",
+      opens: "required",
+      closes: "required",
+      holiday: "required",
+      image: "required"
+    }
+  );
 
-  const handleSubmit = (event) => {
+  // const onSubmit = async (event) => {
+  //   const isValid = await form.validate(event);
+  //   if (isValid) {
+  //     console.log("MAKE AN API CALL", fields, errors);
+  //   }
+  // };
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const isValid = await form.validate(event);
+    if (isValid) {
+      console.log("MAKE AN API CALL", fields, errors);
+    }
+    console.log('isvalid', isValid, errors)
+
     const formData = new FormData();
-    formData.append('name', name)
-    formData.append('email', email)
-    formData.append('address1', address1)
-    formData.append('address2', address2)
-    formData.append('pincode', pincode)
-    formData.append('city', city)
-    formData.append('landline', landline)
-    formData.append('mobile', mobile)
-    formData.append('gstin', gstin)
-    formData.append('pan', pan)
-    formData.append('chairs', chairs)
+    formData.append('name', fields.name)
+    formData.append('email', fields.email)
+    formData.append('address1', fields.address1)
+    formData.append('address2', fields.address2)
+    formData.append('pincode', fields.pincode)
+    formData.append('city', fields.city)
+    formData.append('landline', fields.landline)
+    formData.append('mobile', fields.mobile)
+    formData.append('gstin', fields.gstin)
+    formData.append('pan', fields.pan)
+    formData.append('chairs', fields.chairs)
     formData.append('user_id', spId)
-    formData.append('weekday', holiday)
-    formData.append('opens', opens)
-    formData.append('closes', closes)
+    formData.append('weekday', fields.holiday)
+    formData.append('opens', fields.opens)
+    formData.append('closes', fields.closes)
     formData.append('image', image)
     console.log('salonDaqta', formData)
     const jwt = localStorage.getItem('token');
 
     const salonsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/salons` : `http://localhost:3001/salons`
-    
+
     fetch(salonsUrl, {
       headers: {
         "Authorization": `Bearer ${jwt}`,
@@ -104,13 +181,317 @@ export default function Salons(props) {
         console.log('res', res)
         setSpSalonId(res.id)
         console.log('salon id', spSalonId)
+        alert("Your Salon details uploaded successfully!")
         setSalonsBtn(!salonsBtn)
 
       })
+      .catch((err) => alert(err));
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <SpaOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Add Your Salon Details
+            </Typography>
+            {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+
+
+
+              </Grid>
+            </Box> */}
+          </Box>
+        </Container>
+      </ThemeProvider>
+
+
+      {/* <h2> Salon Owner Signup</h2> */}
+      <form
+        className="myForm container"
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+
+        <p>
+          <label>
+            Name of the Salon
+            <input
+              type="text"
+              name="name"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.name}
+            />
+          </label>
+          <label className="error">
+            {errors.name ? errors.name : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            Email
+            <input
+              type="email"
+              name="email"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.email}
+            />
+          </label>
+          <label className="error">
+            {errors.email ? errors.email : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            Address 1
+            <input
+              type="text"
+              name="address1"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.address1}
+            />
+          </label>
+          <label className="error">
+            {errors.address1 ? errors.address1 : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            Address 2
+            <input
+              type="text"
+              name="address2"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.address2}
+            />
+          </label>
+          <label className="error">
+            {errors.address2 ? errors.address2 : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            Pincode
+            <input
+              type="number"
+              name="pincode"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.pincode}
+            />
+          </label>
+          <label className="error">
+            {errors.pincode ? errors.pincode : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            City
+            <input
+              type="text"
+              name="city"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.city}
+            />
+          </label>
+          <label className="error">
+            {errors.city ? errors.city : ""}
+          </label>
+        </p>
+
+
+        <p>
+          <label>
+            Land Line (with STD )
+            <input
+              type="number"
+              name="landline"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.landline}
+            />
+          </label>
+          <label className="error">
+            {/* {errors.landline ? errors.landline : ""} */}
+          </label>
+        </p>
+
+
+
+        <p>
+          <label>
+            Mobile
+            <input
+              type="tel"
+              name="mobile"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.mobile}
+            />
+          </label>
+          <label className="error">
+            {errors.mobile ? errors.mobile : ""}
+          </label>
+        </p>
+        <p>
+          <label>
+            GST (15 dig)
+            <input
+              type="text"
+              name="gst"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.gst}
+            />
+          </label>
+          <label className="error">
+            {errors.gst ? errors.gst : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            PAN (10 dig)
+            <input
+              type="text"
+              name="pan"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.pan}
+            />
+          </label>
+          <label className="error">
+            {errors.pan ? errors.pan : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            Chairs
+            <input
+              type="number"
+              name="chairs"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.chairs}
+            />
+          </label>
+          <label className="error">
+            {errors.chairs ? errors.chairs : ""}
+          </label>
+        </p>
+        <p>
+          <label>
+            Opens
+            <input
+              type="time"
+              name="opens"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.opens}
+            />
+          </label>
+          <label className="error">
+            {errors.opens ? errors.opens : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            Closes
+            <input
+              type="time"
+              name="closes"
+              onBlur={form.handleBlurEvent}
+              onChange={form.handleChangeEvent}
+              value={fields.closes}
+            />
+          </label>
+          <label className="error">
+            {errors.closes ? errors.closes : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            Weekly Holiday
+            <select
+              id="holiday"
+              name="holiday"
+              value={fields.holiday}
+              onChange={form.handleChangeEvent}
+              onBlur={form.handleBlurEvent}
+            >
+              <option value="">Select</option>
+              <option value={1}>Sunday</option>
+              <option value={2}>Monday</option>
+              <option value={3}>Tuesday</option>
+              <option value={4}>Wednesday</option>
+              <option value={5}>Thursday</option>
+              <option value={6}>Friday</option>
+              <option value={7}>Saturday</option>
+            </select>
+          </label>
+          <label className="error">
+            {errors.holiday ? errors.holiday : ""}
+          </label>
+        </p>
+
+        <p>
+          <label>
+            Image Upload
+            <input type="file"
+              accept="image/*"
+              multiple={false}
+              onChange={onImageChange}
+            />
+          </label>
+          {/* <label className="error">
+            {errors.closes ? errors.closes : ""}
+          </label> */}
+        </p>
+
+        <p>
+          <button type="submit"
+            disabled={salonsBtn}
+          >
+            Submit Salon Details</button>
+        </p>
+
+        <p>
+          <button
+            type="submit"
+            onClick={onClose}
+          >
+            Exit
+          </button>
+        </p>
+      </form>
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -121,16 +502,24 @@ export default function Salons(props) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <SpaOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Add Your Salon Details
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={onClose}
+          >
+            Exit
+          </Button>
+        </Box>
+      </Container>
+    </>
+  );
 
-              <Grid item xs={12}>
+
+
+}
+
+{/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -141,8 +530,8 @@ export default function Salons(props) {
                     setName(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -153,8 +542,8 @@ export default function Salons(props) {
                     setEmail(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -165,8 +554,8 @@ export default function Salons(props) {
                     setAddress1(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -177,8 +566,8 @@ export default function Salons(props) {
                     setAddress2(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -189,8 +578,8 @@ export default function Salons(props) {
                     setPincode(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -201,8 +590,8 @@ export default function Salons(props) {
                     setCity(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   fullWidth
                   id="landline"
@@ -212,8 +601,8 @@ export default function Salons(props) {
                     setLandline(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -224,8 +613,8 @@ export default function Salons(props) {
                     setMobile(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -236,8 +625,8 @@ export default function Salons(props) {
                     setGstin(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -248,8 +637,8 @@ export default function Salons(props) {
                     setPan(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+{/* <Grid item xs={12}>
                 <TextField
                   type="number"
                   required
@@ -261,8 +650,8 @@ export default function Salons(props) {
                     setChairs(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              </Grid> */}
+{/* <Grid item xs={12} sm={6}>
                 <TextField
                   type="time"
                   name="opens"
@@ -275,8 +664,8 @@ export default function Salons(props) {
                     setOpens(event.target.value)
                   }}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              </Grid> */}
+{/* <Grid item xs={12} sm={6}>
                 <TextField
                   type="time"
                   required
@@ -289,8 +678,8 @@ export default function Salons(props) {
                     setCloses(event.target.value)
                   }}
                 />
-              </Grid>
-              <FormControl fullWidth>
+              </Grid> */}
+{/* <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Holiday</InputLabel>
                 <Select
                   labelId="holiday"
@@ -309,15 +698,15 @@ export default function Salons(props) {
                   <MenuItem value={6}>Friday</MenuItem>
                   <MenuItem value={7}>Saturday</MenuItem>
                 </Select>
-              </FormControl>
-            </Grid>
-            Upload Image
+              </FormControl> */}
+
+{/* Upload Image
             <input type="file"
               accept="image/*"
               multiple={false}
               onChange={onImageChange}
-            />
-            <Button
+            /> */}
+{/* <Button
               disabled={salonsBtn}
               type="submit"
               fullWidth
@@ -325,20 +714,14 @@ export default function Salons(props) {
               sx={{ mt: 3, mb: 2 }}
             >
               Submit Salon Details
-            </Button>
+            </Button> */}
 
-          </Box>
 
-          <Button
+{/* <Button
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             onClick={onClose}
           >
             Exit
-          </Button>
-        </Box>
-      </Container>
-    </ThemeProvider>
-  );
-}
+          </Button> */}
