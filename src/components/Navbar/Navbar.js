@@ -191,7 +191,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
           + "Team GroomWell"
       }
       console.log('signing up', signupData)
-      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/signup` : `http://localhost:3001/signup`
+      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/signup` : `http://localhost:3001/signup`
       fetch(signUpUrl, {
         method: "post",
         headers: {
@@ -237,7 +237,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
         .then(() => {
           // console.log('md', signupData);
           const jwt = localStorage.getItem('token')
-          const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/contacts`
+          const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/contacts`
             : `http://localhost:3001/contacts`
 
           try {
@@ -267,7 +267,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
 
     console.log('logging', (process.env.REACT_APP_SERVER))
-    const loginUrl = (process.env.REACT_APP_SERVER ? `https://groomserver.herokuapp.com/login` : `http://localhost:3001/login`)
+    const loginUrl = (process.env.REACT_APP_SERVER ? `https://groomwell-backend.onrender.com/login` : `http://localhost:3001/login`)
     console.log('url', loginUrl)
     // console.log('server', process.env.REACT_APP_SERVER )
     fetch(loginUrl, {
@@ -313,7 +313,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
   }
 
   const handleLogout = () => {
-    const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/logout`
+    const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/logout`
       : `http://localhost:3001/logout`
     fetch(logoutUrl, {
       method: "delete",

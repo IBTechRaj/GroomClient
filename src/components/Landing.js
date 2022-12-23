@@ -18,7 +18,7 @@ function Landing(props) {
   const { userId, userName, userEmail } = props
   const [salons, setSalons] = useState([])
   const classes = useStyles()
-  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/salons` : `http://localhost:3001/salons`
+  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/salons` : `http://localhost:3001/salons`
   // const salonurl = 'http://localhost:3001/salons';
   // const salonurl = 'https://groomserver.herokuapp.com/salons';
 
@@ -40,10 +40,10 @@ function Landing(props) {
     )
       .then(({ data }) => {
         setSalons(data)
-         console.log('cnt', salons.count) 
+        console.log('cnt', salons.count)
       })
-    
-  //  getSalonData()
+
+    //  getSalonData()
   }, [])
 
   return (
