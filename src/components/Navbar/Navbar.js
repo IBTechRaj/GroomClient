@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import './Navbar.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
@@ -23,12 +24,15 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
+  const [openForgot, setOpenForgot] = useState(false);
 
+  const [forgotEmail, setForgotEmail] = useState('')
   const [form, setForm] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
+
 
   const { errors, validateForm, onBlurField } = useLoginFormValidator(form);
   // const { errors, validateForm, onBlurField } = useLoginFormValidator(form);
@@ -139,8 +143,17 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
   const onOpenLoginModal = () => {
     setOpenLogin(true);
-
   }
+
+  const onOpenForgotModal = () => {
+    console.log('clicked')
+    setOpenForgot(true);
+  }
+
+  const onCloseForgotModal = () => {
+    setOpenForgot(false);
+  }
+
   const onCloseLoginModal = () => setOpenLogin(false);
   const onOpenSignupModal = () => {
     setOpenSignup(true)
@@ -312,6 +325,47 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
       .catch((err) => alert(err));
   }
 
+  const emdata = {
+    email: forgotEmail
+  }
+  const handleSubmitForgotPassword = async (event) => {
+    event.preventDefault();
+    const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/forgot_password` : `http://localhost:3001/forgot_password`
+
+    console.log('forgot 1', forgotUrl)
+
+    try {
+      fetch(forgotUrl, {
+        // credentials: "include",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emdata)
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("forgot email posted", res)
+            alert('Password reset link sent to your email')
+            setOpenForgot(false)
+            return res.json();
+          } else {
+            alert('We could not find this email in our system')
+            setOpenForgot(false)
+            throw new Error(res);
+          }
+
+        })
+        .then((data) => {
+          console.log('d', data)
+        })
+        .then((json) => console.dir(json))
+    }
+    catch (error) {
+      console.log('Err: ', error);
+    }
+  }
+
   const handleLogout = () => {
     const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/logout`
       : `http://localhost:3001/logout`
@@ -446,6 +500,17 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
             ) : null}
           </div>
 
+          <Link
+            to={'/ForgotPassword'}
+            // className='nav-links'
+            color='black'
+            onClick={
+              onCloseLoginModal
+            }
+          >
+            Forgot Password
+          </Link>
+
           <div className={styles.formActions}>
             <button className={styles.formSubmitBtn} type="submit">
               Login
@@ -485,6 +550,49 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
         {/* </form> */}
       </Modal>
+
+      <Modal open={openForgot} onClose={onCloseForgotModal} centre>
+        <h5>Enter your Email</h5>
+        <form onSubmit={handleSubmitForgotPassword}>
+          <label className="justify-left w-100 px-5">
+            <input
+              className="form-control"
+              placeholder="email"
+              type="text"
+              name="forgotEmail"
+              value={forgotEmail}
+              onChange={event => {
+                setForgotEmail(event.target.value)
+              }}
+            />
+            <br />
+            {/* <input
+              className="form-control"
+              placeholder="password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={event => {
+                setPassword(event.target.value)
+              }}
+            /> */}
+          </label>
+
+          <br /><br />
+          <label className="justify-left w-100 px-5">
+            {' '}
+            <input className="w-100 btn btn-primary" type="submit" />
+          </label>
+          We shall send Reset Password Link to this email if it is valid.
+        </form>
+        After you receive the reset link, click here to <Link
+          to='/PasswordReset'
+          color='black'
+          onClick={onCloseForgotModal}>
+          Reset Password</Link> .
+      </Modal>
+
+
       <Modal open={openSignup} onClose={onCloseSignupModal} centre>
         <h2>Signup</h2>
         <form className={styles.form} onSubmit={handleSubmitSignup}>

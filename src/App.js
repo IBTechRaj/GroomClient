@@ -1,13 +1,16 @@
 import React from 'react';
 import { useState } from 'react'
 import './App.css';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Carousel from './components/Carousel/MyCarousel'
 import Landing from './components/Landing'
 import Sprovider from './components/Sprovider'
 import SpLogin from './components/SpLogin'
+import Home from './components/Home'
+import ForgotPassword from './components/Navbar/ForgotPassword';
+import PasswordReset from './components/Navbar/PasswordReset';
 
 
 function App() {
@@ -29,15 +32,15 @@ function App() {
         userEmail={userEmail} setUserEmail={setUserEmail}
         userMobile={userMobile} setUserMobile={setUserMobile}
       />
-      <Carousel />
-      <SpLogin spLoggedIn={spLoggedIn} setSpLoggedIn={setSpLoggedIn} client={client} setClient={setClient} spId={spId} setSpId={setSpId} spSalonId={spSalonId} setSpSalonId={setSpSalonId} />
       <Switch>
-        {/* {console.log('s p l', spId, spSalonId, spLoggedIn)} */}
-        {/* {console.log('ui un ue um', userId, userName,userEmail,userMobile)} */}
+        <Route path='/' exact component={Home} />
+        {/* <SpLogin spLoggedIn={spLoggedIn} setSpLoggedIn={setSpLoggedIn} client={client} setClient={setClient} spId={spId} setSpId={setSpId} spSalonId={spSalonId} setSpSalonId={setSpSalonId} />
         {client ?
           < Landing userId={userId} userName={userName} userEmail={userEmail} userMobile={userMobile} /> :
           <Sprovider spId={spId} spSalonId={spSalonId} setSpSalonId={setSpSalonId} />
-        }
+        } */}
+        <Route path='/ForgotPassword' exact component={ForgotPassword} />
+        <Route path='/PasswordReset' exact component={PasswordReset} />
       </Switch>
       <Footer />
     </Router>
