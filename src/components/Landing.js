@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import Grid from '@mui/material/Grid'
 import Card from './Card'
 import 'react-responsive-modal/styles.css';
+import Spinner from './Spinner'
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -14,7 +15,8 @@ const useStyles = makeStyles({
 
 function Landing(props) {
 
-  console.log('lndg props', props)
+  // console.log('lndg props', props)
+  let content = '';
   const { userId, userName, userEmail } = props
   const [salons, setSalons] = useState([])
   const classes = useStyles()
@@ -40,7 +42,7 @@ function Landing(props) {
     )
       .then(({ data }) => {
         setSalons(data)
-        console.log('cnt', salons.count)
+        // console.log('cnt', salons.count)
       })
 
     //  getSalonData()
@@ -50,14 +52,22 @@ function Landing(props) {
     <>
 
       <h2> Choose Your Salon to Book Your Service</h2>
-      <Grid container spacing={2} className={classes.gridContainer} justify="center">
+      {
+        content = salons.length === 0 ? (
+          <div>
+            <Spinner />
+          </div>
+        ) : (
+          <Grid container spacing={2} className={classes.gridContainer} justify="center">
 
-        {salons.map(salon => (
-          <Grid item xs={12} sm={6} key={salon.id}>
-            <Card salon={salon} userId={userId} userName={userName} userEmail={userEmail} userMobile={props.userMobile} />
+            {salons.map(salon => (
+
+              <Grid item xs={12} sm={6} key={salon.id}>
+                <Card salon={salon} userId={userId} userName={userName} userEmail={userEmail} userMobile={props.userMobile} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        )}
     </>
   )
 }

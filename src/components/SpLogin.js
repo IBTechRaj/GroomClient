@@ -44,7 +44,7 @@ function SpLogin(props) {
   const onSubmit = async (event) => {
     const isValid = await form.validate(event);
     if (isValid) {
-      console.log("MAKE AN API CALL", fields, errors);
+      // console.log("MAKE AN API CALL", fields, errors);
     }
   };
 
@@ -66,8 +66,8 @@ function SpLogin(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [gender, setGender] = useState(0)
   const [mobile, setMobile] = useState('')
   const [dob, setDob] = useState('')
@@ -75,8 +75,8 @@ function SpLogin(props) {
   const signupData = {
     "email": fields.email_address,
     "password": fields.password,
-    "first_name": fields.firstname,
-    "last_name": fields.lastname,
+    "first_name": fields.firstName,
+    "last_name": fields.lastName,
     "gender": fields.gender,
     "mobile": fields.mobile,
     "date_of_birth": fields.dob,
@@ -88,16 +88,16 @@ function SpLogin(props) {
     event.preventDefault();
     const isValid = await form.validate(event);
     if (isValid) {
-      console.log("MAKE AN API CALL", fields, errors);
+      // console.log("MAKE AN API CALL", fields, errors);
     }
     if (password === passwordConfirmation) {
       const emailData = {
         "subject": 'Service Provider Registration Success!',
-        "name": firstname,
+        "name": firstName,
         "email": email,
         "message":
           "Dear " +
-          firstname +
+          firstName +
           ",\n\n" +
           "Thank you for registering with GroomWell Services. Now you can login and fill the details of your Salon and Services\n"
           + "For any queries please call Customer Care." +
@@ -105,8 +105,8 @@ function SpLogin(props) {
           "Team GroomWell"
       }
 
-      console.log('Sp signing up', signupData)
-      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/signup` : `http://localhost:3001/signup`
+      // console.log('Sp signing up', signupData)
+      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/signup` : `http://localhost:3001/signup`
       // fetch("https://groomserver.herokuapp.com/signup", {
       fetch(signUpUrl, {
         method: "post",
@@ -117,8 +117,8 @@ function SpLogin(props) {
           user: {
             email: fields.email_address,
             password: fields.password,
-            first_name: fields.firstname,
-            last_name: fields.lastname,
+            first_name: fields.firstName,
+            last_name: fields.lastName,
             gender: parseInt(fields.gender),
             mobile: fields.mobile,
             date_of_birth: fields.dob,
@@ -128,55 +128,55 @@ function SpLogin(props) {
       })
         .then((res) => {
           if (res.ok) {
-            console.log('res ok', res)
-            console.log(res.headers.get("Authorization"));
+            // console.log('res ok', res)
+            // console.log(res.headers.get("Authorization"));
             localStorage.setItem("token", res.headers.get("Authorization"));
             setSpLoggedIn(true);
             onCloseSpSignupModal()
             setClient(false)
             return res.json();
           } else {
-            console.log('res err', res)
+            // console.log('res err', res)
             onCloseSpSignupModal()
             throw new Error(res);
           }
         })
         .then((data) => {
-          console.log('d', data)
+          // console.log('d', data)
 
           let cur_user_salon_id = data.data.salon_ids[0]
           let cur_user_type = data.data.usertype
           setSpSalonId(cur_user_salon_id)
           let cur_user_id = data.data.id
 
-          console.log('id,type,salon', cur_user_id, cur_user_type, cur_user_salon_id)
-          console.log('spId', cur_user_id)
+          // console.log('id,type,salon', cur_user_id, cur_user_type, cur_user_salon_id)
+          // console.log('spId', cur_user_id)
           setSpId(cur_user_id)
-          console.log('sp md', signupData);
+          // console.log('sp md', signupData);
           const jwt = localStorage.getItem('token')
-          const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+          const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/contacts` : `http://localhost:3001/contacts`
 
 
           try {
             const res = axios.post(contactsUrl, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
-            console.log('res', res);
+            // console.log('res', res);
           }
           catch (error) {
-            console.log('oh, no', error);
+            // console.log('oh, no', error);
           }
         })
         .catch((err) => console.error(err));
     }
     else {
-      console.log('Passwords should match')
+      alert('Passwords should match')
     }
   }
 
   const handleSubmitSpLogin = async (event) => {
     event.preventDefault();
-    console.log('Sp logging')
+    // console.log('Sp logging')
 
-    const loginUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/login` : `http://localhost:3001/login`
+    const loginUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/login` : `http://localhost:3001/login`
     fetch(loginUrl, {
       method: "post",
       headers: {
@@ -191,26 +191,27 @@ function SpLogin(props) {
     })
       .then((res) => {
         if (res.ok) {
-          console.log('token', res.headers.get("Authorization"))
-          console.log('res', res)
+          // console.log('token', res.headers.get("Authorization"))
+          // console.log('res', res)
           localStorage.setItem("token", res.headers.get("Authorization"));
           setSpLoggedIn(true);
           setClient(false)
           onCloseSpLoginModal()
           return res.json();
         } else {
-          console.log('sp in err', res)
+          // console.log('sp in err', res)
+          onCloseSpLoginModal()
           return res.text().then((text) => Promise.reject(text));
         }
       })
       .then((data) => {
-        console.log('d d', data.data)
+        // console.log('d d', data.data)
         let cur_user_salon_id = data.data.salon_ids[0]
         let cur_user_id = data.data.id
         let cur_user_type = data.data.usertype
         setSpId(cur_user_id)
         setSpSalonId(cur_user_salon_id)
-        console.log('id,type,salon', cur_user_id, cur_user_type, cur_user_salon_id)
+        // console.log('id,type,salon', cur_user_id, cur_user_type, cur_user_salon_id)
         if (cur_user_type === 'client') {
           alert('It seems you are registered as Client. To offer your services, please register as Service Provider or Call Customer Care')
           setSpLoggedIn(false)
@@ -218,10 +219,10 @@ function SpLogin(props) {
         }
       })
       .then((json) => console.dir(json))
-      .catch((err) => console.error(err));
+      .catch((err) => alert(err));
   }
 
-  const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/logout` : `http://localhost:3001/logout`
+  const logoutUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/logout` : `http://localhost:3001/logout`
 
   const handleSpLogout = () => {
     fetch(logoutUrl, {

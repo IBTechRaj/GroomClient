@@ -24,7 +24,7 @@ const theme = createTheme();
 
 export default function Salons(props) {
   const { spId, spSalonId, setSpSalonId, onClose } = props
-  console.log('sln props', props)
+  // console.log('sln props', props)
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -48,9 +48,9 @@ export default function Salons(props) {
   const onSubmit = async (event) => {
     const isValid = await form.validate(event);
     if (isValid) {
-      console.log("MAKE AN API CALL", fields, errors);
+      // console.log("MAKE AN API CALL", fields, errors);
     }
-    console.log('isvalid', isValid)
+    // console.log('isvalid', isValid)
   };
 
 
@@ -86,7 +86,6 @@ export default function Salons(props) {
       // firstName: "",
       // lastName: "",
       // gender: "",
-      // mobile: "",
       // dob: "",
       name: "",
       address1: "",
@@ -94,6 +93,7 @@ export default function Salons(props) {
       pincode: "",
       city: "",
       landline: "",
+      mobile: "",
       gst: "",
       pan: "",
       chairs: "",
@@ -111,7 +111,6 @@ export default function Salons(props) {
       // firstName: "required",
       // lastName: "required",
       // dob: "required|date",
-      // mobile: "required|numeric|digits:10",
       // gender: "required",
       name: "required",
       address1: "required",
@@ -119,6 +118,7 @@ export default function Salons(props) {
       pincode: "required|digits:6",
       city: "required",
       landline: "",
+      mobile: "required|numeric|digits:10",
       gst: "required|alpha_num:15",
       pan: "required|alpha_num:10",
       chairs: "required",
@@ -142,9 +142,9 @@ export default function Salons(props) {
 
     const isValid = await form.validate(event);
     if (isValid) {
-      console.log("MAKE AN API CALL", fields, errors);
+      // console.log("MAKE AN API CALL", fields, errors);
     }
-    console.log('isvalid', isValid, errors)
+    // console.log('isvalid', isValid, errors)
 
     const formData = new FormData();
     formData.append('name', fields.name)
@@ -163,10 +163,10 @@ export default function Salons(props) {
     formData.append('opens', fields.opens)
     formData.append('closes', fields.closes)
     formData.append('image', image)
-    console.log('salonDaqta', formData)
+    // console.log('salonDaqta', formData)
     const jwt = localStorage.getItem('token');
 
-    const salonsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/salons` : `http://localhost:3001/salons`
+    const salonsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/salons` : `http://localhost:3001/salons`
 
     fetch(salonsUrl, {
       headers: {
@@ -178,9 +178,9 @@ export default function Salons(props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log('res', res)
+        // console.log('res', res)
         setSpSalonId(res.id)
-        console.log('salon id', spSalonId)
+        // console.log('salon id', spSalonId)
         alert("Your Salon details uploaded successfully!")
         setSalonsBtn(!salonsBtn)
 

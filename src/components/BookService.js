@@ -33,7 +33,7 @@ const lightTheme = createTheme({ palette: { mode: 'light' } });
 
 export default function Elevation(props) {
 
-  console.log('ele props', props)
+  // console.log('ele props', props)
   const [service, setService] = useState('Choose Service')
   const [showTime, setShowTime] = useState(false)
   const [apptDate, setApptDate] = useState()
@@ -93,9 +93,9 @@ export default function Elevation(props) {
       salon_id: props.salonId,
       user_id: props.userId
     }
-    console.log('appt data', appointment)
+    // console.log('appt data', appointment)
     const jwt = localStorage.getItem('token');
-    const apptUrl = (process.env.REACT_APP_SERVER ? `https://groomserver.herokuapp.com/appointments` : `http://localhost:3001/appointments`)
+    const apptUrl = (process.env.REACT_APP_SERVER ? `https://groomwell-backend.onrender.com/appointments` : `http://localhost:3001/appointments`)
     // const apptUrl = 'https://groomserver.herokuapp.com/appointments';
 
     axios.post(apptUrl, appointment, {
@@ -104,35 +104,35 @@ export default function Elevation(props) {
       .then(response => {
         if (response.status === 201) {
           alert('Your appointment successfully booked')
-          console.log('Appointment Added')
+          // console.log('Appointment Added')
         }
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+        const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/contacts` : `http://localhost:3001/contacts`
         // const contactsUrl = 'https://groomserver.herokuapp.com/contacts'
 
         try {
           const res = axios.post(contactsUrl, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
-          console.log('res', res);
+          // console.log('res', res);
         }
         catch (error) {
-          console.log('cl eml err', error);
+          // console.log('cl eml err', error);
         }
 
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+        const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/contacts` : `http://localhost:3001/contacts`
         // const contactsUrl = 'https://groomserver.herokuapp.com/contacts'
 
         try {
           const res = axios.post(contactsUrl, emailSpData, { headers: { Authorization: `Bearer ${jwt}` } });
-          console.log('res', res);
+          // console.log('res', res);
           props.setBookingVisible(false)
         }
         catch (error) {
-          console.log('sp eml err', error);
+          // console.log('sp eml err', error);
         }
 
       })
@@ -182,7 +182,7 @@ export default function Elevation(props) {
                       <Col xs={6} style={{ marginLeft: 200, position: 'absolute' }}>
 
                         {showTime ? <TimeSlots setApptTime={setApptTime} setShowTime={setShowTime} startDate={startDate} salonId={props.salonId} /> : null}
-                        {console.log('dt,tm', startDate.toLocaleDateString(), apptTime)}
+                        {/* {console.log('dt,tm', startDate.toLocaleDateString(), apptTime)} */}
                       </Col>
                       <Col xs={6} >
                         <DatePicker

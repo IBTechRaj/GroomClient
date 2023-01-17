@@ -53,7 +53,7 @@ export const dobValidator = dob => {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age_now--;
     }
-    console.log('age now', age_now);
+    // console.log('age now', age_now);
     // return age_now;
   }
   if (age_now < 16) {

@@ -19,18 +19,18 @@ import "./Form.css";
 
 export default function EditSalon(props) {
   const { spSalonId, onClose } = props
-  console.log('edit props', props)
+  // console.log('edit props', props)
   const [salonData, setSalonData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [salonId, setSalonId] = useState(0)
 
   const [image, setImage] = useState('')
-  console.log('SalonDat', salonData)
+  // console.log('SalonDat', salonData)
   // const [formData, updateFormData] = useState(salonData)
-  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/salons/${spSalonId}` : `http://localhost:3001/salons/${spSalonId}`
+  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/salons/${spSalonId}` : `http://localhost:3001/salons/${spSalonId}`
 
-  const userSalonUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/salons/${spSalonId}` : `http://localhost:3001/salons/${spSalonId}`
+  const userSalonUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/salons/${spSalonId}` : `http://localhost:3001/salons/${spSalonId}`
   // const salonurl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
   // const userSalonUrl = `https://groomserver.herokuapp.com/salons/${props.salonId}`;
 
@@ -41,12 +41,12 @@ export default function EditSalon(props) {
           userSalonUrl
         );
         setSalonData(response.data);
-        console.log('respd', response.data)
+        // console.log('respd', response.data)
         setSalonId(response.data.id)
-        console.log('salon id', salonId)
+        // console.log('salon id', salonId)
         setError(null);
       } catch (err) {
-        console.log('e', err.message)
+        // console.log('e', err.message)
         setError(err.message);
         setSalonData(null);
       } finally {
@@ -130,9 +130,9 @@ export default function EditSalon(props) {
 
     const isValid = await form.validate(event);
     if (isValid) {
-      console.log("MAKE AN API CALL", fields, errors);
+      // console.log("MAKE AN API CALL", fields, errors);
     }
-    console.log('isvalid', isValid)
+    // console.log('isvalid', isValid)
 
     const formData = new FormData();
     formData.append('name', fields.name ? fields.name : salonData.name)
@@ -152,12 +152,12 @@ export default function EditSalon(props) {
     formData.append('closes', fields.closes ? fields.closes : salonData.closes)
     if (image)
       formData.append('image', image)
-    console.log('salonDaqta', formData)
+    // console.log('salonDaqta', formData)
     const jwt = localStorage.getItem('token');
 
     axios.put(salonUrl, formData)
       .then(res => {
-        console.log('upd', res.data)
+        // console.log('upd', res.data)
         alert('Salon Details updated successfully')
         onclose()
       });

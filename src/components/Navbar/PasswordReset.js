@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 const PasswordReset = () => {
 
-    const baseURL = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/` : `http://localhost:3001/`
+    const baseURL = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/` : `http://localhost:3001/`
 
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -47,7 +47,7 @@ const PasswordReset = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('pr', data)
+                    // console.log('pr', data)
                     if (data.status === 'ok') {
                         alert('Password Reset Successful!')
                     } else {

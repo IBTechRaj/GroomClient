@@ -14,8 +14,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 export default function Services(props) {
-  console.log('ssser', props)
-  const { spSalonId }=props
+  // console.log('ssser', props)
+  const { spSalonId } = props
   const [serviceName, setServiceName] = useState("")
   const [serviceDuration, setServiceDuration] = useState("")
   const [servicePrice, setServicePrice] = useState("0")
@@ -23,14 +23,14 @@ export default function Services(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services/${spSalonId}` : `http://localhost:3001/services/${spSalonId}`
-  const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services/` : `http://localhost:3001/services/`
-  const serviceAddUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services/` : `http://localhost:3001/services/`
+  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/services/${spSalonId}` : `http://localhost:3001/services/${spSalonId}`
+  const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/services/` : `http://localhost:3001/services/`
+  const serviceAddUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/services/` : `http://localhost:3001/services/`
   // const serviceDelUrl = 'https://groomserver.herokuapp.com/services/'
   // const servicesUrl = `https://groomserver.herokuapp.com/services/${props.salonId}`
   // const serviceDelUrl = 'http://localhost:3001/services/'
   // const servicesUrl = `http://localhost:3001/services/${props.salonId}`
-  
+
 
   const jwt = localStorage.getItem('token');
 
@@ -39,7 +39,7 @@ export default function Services(props) {
       headers: { Authorization: `Bearer ${jwt}` },
     })
       .then(response => {
-        console.log('res.dat', response.data)
+        // console.log('res.dat', response.data)
         setServiceData(response.data)
       })
   }
@@ -56,16 +56,16 @@ export default function Services(props) {
 
   const handleServiceSubmit = (e) => {
     e.preventDefault();
-    console.log('servicesData', service)
+    // console.log('servicesData', service)
 
     // const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
-    
+
     axios.post(serviceAddUrl, service, {
       headers: { Authorization: `Bearer ${jwt}` },
     })
       .then(response => {
         if (response.status === 201) {
-          console.log('Service Added')
+          // console.log('Service Added')
           setServiceName('')
           setServiceDuration('')
           setServicePrice(0)
@@ -87,11 +87,11 @@ export default function Services(props) {
         serviceDelUrl + id
       );
       // setServiceData(response.data);
-      console.log('del', response)
+      // console.log('del', response)
       getServices()
       setError(null);
     } catch (err) {
-      console.log('e', err.message)
+      // console.log('e', err.message)
       setError(err.message);
     } finally {
       setLoading(false);

@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import Carousel from './Carousel/MyCarousel'
 import Landing from './Landing'
-import Sprovider from '../components/Sprovider'
+import Sprovider from './Sprovider'
 import SpLogin from './SpLogin'
 
 
-function Home() {
+function Home(props) {
 
     const [spLoggedIn, setSpLoggedIn] = useState(false)
     const [client, setClient] = useState(true)
     const [spId, setSpId] = useState(0)
     const [spSalonId, setSpSalonId] = useState(0)
-    const [userId, setUserId] = useState(0)
-    const [userName, setUserName] = useState('')
-    const [userEmail, setUserEmail] = useState('')
-    const [userMobile, setUserMobile] = useState('')
+    // const [userId, setUserId] = useState(0)
+    // const [userName, setUserName] = useState('')
+    // const [userEmail, setUserEmail] = useState('')
+    // const [userMobile, setUserMobile] = useState('')
+    const { userId, userName, userEmail, userMobile } = props
     return (
         <>
             <Carousel />

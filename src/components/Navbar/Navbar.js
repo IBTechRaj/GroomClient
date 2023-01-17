@@ -146,7 +146,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
   }
 
   const onOpenForgotModal = () => {
-    console.log('clicked')
+    // console.log('clicked')
     setOpenForgot(true);
   }
 
@@ -186,7 +186,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
 
     const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
-    console.log('isvalid', isValid)
+    // console.log('isvalid', isValid)
     if (!isValid) return;
     // alert(JSON.stringify(form, null, 2));
 
@@ -203,7 +203,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
           + "\n\n"
           + "Team GroomWell"
       }
-      console.log('signing up', signupData)
+      // console.log('signing up', signupData)
       const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/signup` : `http://localhost:3001/signup`
       fetch(signUpUrl, {
         method: "post",
@@ -225,15 +225,15 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
       })
         .then((res) => {
           if (res.ok) {
-            console.log('signedUp', res)
-            console.log(res.headers.get("Authorization"));
+            // console.log('signedUp', res)
+            // console.log(res.headers.get("Authorization"));
             localStorage.setItem("token", res.headers.get("Authorization"));
             setLoggedIn(true);
             onCloseSignupModal()
 
             return res.json();
           } else {
-            console.log('Error signup')
+            // console.log('Error signup')
             alert('Problem signing up')
             onCloseSignupModal()
             throw new Error(res);
@@ -241,7 +241,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
         })
         .then((data) => {
           setUserId(data.data.id)
-          console.log('userId', userId)
+          // console.log('userId', userId)
           setUserName(data.data.first_name)
           setUserEmail(data.data.email)
           setUserMobile(data.data.mobile)
@@ -255,17 +255,17 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
           try {
             const res = axios.post(contactsUrl, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
-            console.log('res', res);
+            // console.log('res', res);
           }
           catch (error) {
-            console.log('oh, no', error);
+            // console.log('oh, no', error);
           }
 
         })
-        .catch((err) => console.log(err));
+      // .catch((err) => console.log(err));
     }
     else {
-      console.log('Passwords should match')
+      alert('Passwords should match')
     }
   }
 
@@ -279,9 +279,9 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
     // alert(JSON.stringify(form, null, 2));
 
 
-    console.log('logging', (process.env.REACT_APP_SERVER))
+    // console.log('logging', (process.env.REACT_APP_SERVER))
     const loginUrl = (process.env.REACT_APP_SERVER ? `https://groomwell-backend.onrender.com/login` : `http://localhost:3001/login`)
-    console.log('url', loginUrl)
+    // console.log('url', loginUrl)
     // console.log('server', process.env.REACT_APP_SERVER )
     fetch(loginUrl, {
       method: "post",
@@ -297,7 +297,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
     })
       .then((res) => {
         if (res.ok) {
-          console.log(res.headers.get("Authorization"));
+          // console.log(res.headers.get("Authorization"));
           localStorage.setItem("token", res.headers.get("Authorization"));
           setLoggedIn(true);
           onCloseLoginModal()
@@ -311,17 +311,17 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
         setUserName(data.data.first_name)
         setUserEmail(data.data.email)
         setUserMobile(data.data.mobile)
-        console.log('logn', data.data)
+        // console.log('logn', data.data)
         // let cur_user_id= data.data.id
         let cur_user_type = data.data.usertype
         let cur_user_name = data.data.first_name
-        console.log(' type, name', cur_user_type, cur_user_name)
+        // console.log(' type, name', cur_user_type, cur_user_name)
         if (cur_user_type === 'sprovider') {
           alert('It seems you are registered as Service Provider. To avail booking services, please register as Client or Call Customer Care')
           setLoggedIn(false)
         }
       })
-      .then((json) => console.dir(json))
+      // .then((json) => console.dir(json))
       .catch((err) => alert(err));
   }
 
@@ -330,9 +330,9 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
   }
   const handleSubmitForgotPassword = async (event) => {
     event.preventDefault();
-    const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/forgot_password` : `http://localhost:3001/forgot_password`
+    const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/forgot_password` : `http://localhost:3001/forgot_password`
 
-    console.log('forgot 1', forgotUrl)
+    // console.log('forgot 1', forgotUrl)
 
     try {
       fetch(forgotUrl, {
@@ -345,7 +345,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
       })
         .then((res) => {
           if (res.status === 200) {
-            console.log("forgot email posted", res)
+            // console.log("forgot email posted", res)
             alert('Password reset link sent to your email')
             setOpenForgot(false)
             return res.json();
@@ -357,12 +357,12 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
         })
         .then((data) => {
-          console.log('d', data)
+          // console.log('d', data)
         })
         .then((json) => console.dir(json))
     }
     catch (error) {
-      console.log('Err: ', error);
+      // console.log('Err: ', error);
     }
   }
 
@@ -377,7 +377,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
       },
     })
       .then((res) => {
-        console.log('lo', res)
+        // console.log('lo', res)
         if (res.ok) {
           setLoggedIn(false)
           return res.json();
@@ -386,7 +386,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
         }
       })
       .then((json) => {
-        console.dir(json);
+        // console.dir(json);
       })
       .catch((err) => console.error(err));
   }

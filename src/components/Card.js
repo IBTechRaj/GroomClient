@@ -19,7 +19,7 @@ export default function OutlineCard(props) {
   const [loading, setLoading] = useState(true);
 
   const [booking, setBooking] = useState({ apptDate: "", apptTime: "" })
-  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
+  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/services` : `http://localhost:3001/services`
   // const servicesUrl = 'http://localhost:3001/services/';
   // const servicesUrl = 'https://groomserver.herokuapp.com/services/';
 
@@ -34,7 +34,7 @@ export default function OutlineCard(props) {
     if (!userName)
       alert('Please login to book your appointment')
     else
-    setBookingVisible(true)
+      setBookingVisible(true)
   }
 
   useEffect(() => {
@@ -100,7 +100,7 @@ export default function OutlineCard(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Share</Button>
+          {/* <Button size="small">Share</Button> */}
           <Button size="small"
             onClick={() => handleBooking()}
           >Book Your Service</Button>

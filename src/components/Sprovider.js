@@ -8,12 +8,12 @@ import EditSalon from './EditSalon'
 
 function Sprovider(props) {
 
-  console.log('spro', props)
-  const { spId, spSalonId , setSpSalonId} = props;
+  // console.log('spro', props)
+  const { spId, spSalonId, setSpSalonId } = props;
   const [showSalons, setShowSalons] = useState(false)
   const [showServices, setShowServices] = useState(false)
   const [editData, setEditData] = useState(false)
-  console.log('spro2', spSalonId)
+  // console.log('spro2', spSalonId)
 
   const closeChild = () => {
     setShowSalons(false)
@@ -75,10 +75,10 @@ function Sprovider(props) {
 
           </ButtonGroup>
           {showSalons &&
-            <Salons spId={spId} spSalonId={spSalonId} setSpSalonId={setSpSalonId}  onClose={closeChild} />
+            <Salons spId={spId} spSalonId={spSalonId} setSpSalonId={setSpSalonId} onClose={closeChild} />
           }
           {showServices &&
-            <Services spSalonId={spSalonId } onClose={closeServices} />
+            <Services spSalonId={spSalonId} onClose={closeServices} />
             // <Services salonId={(salonId ? salonId : props.salonId)} onClose={closeServices} />
           }
           {editData &&

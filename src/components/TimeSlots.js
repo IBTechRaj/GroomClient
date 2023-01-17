@@ -39,21 +39,21 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function ResponsiveGrid(props) {
   const setTime = (x, h = 0, m = 0) => setHours(setMinutes(x, m), h)
   const from = setTime(new Date(), 7)
-  console.log(from)
+  // console.log(from)
   const to = setTime(new Date(), 21)
-  console.log(to)
+  // console.log(to)
   const step = (x) => addMinutes(x, 30)
   const blocks = []
   let cursor = from
   while (isBefore(cursor, to)) {
-    console.log('timings', cursor.toLocaleTimeString())
+    // console.log('timings', cursor.toLocaleTimeString())
     blocks.push(cursor.toLocaleTimeString().slice(-11, -6) + cursor.toLocaleTimeString().slice(-3))
     cursor = step(cursor)
   }
-  console.log(blocks)
+  // console.log(blocks)
 
   const classes = useStyles()
-  console.log('tl props', props)
+  // console.log('tl props', props)
   const [reserved, setReserved] = useState([])
 
   const getApptTime = (tmslot) => {
@@ -68,7 +68,7 @@ export default function ResponsiveGrid(props) {
 
   useEffect(() => {
     const jwt = localStorage.getItem('token');
-    const apptUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/appointments/${props.salonId}/${props.startDate.toUTCString()}`
+    const apptUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/appointments/${props.salonId}/${props.startDate.toUTCString()}`
       : `http://localhost:3001/appointments/${props.salonId}/${props.startDate.toUTCString()}`
 
     const getCurrentAppts = async () => {
@@ -78,7 +78,7 @@ export default function ResponsiveGrid(props) {
         )
           .then(response => {
             if (response.status === 200) {
-              console.log('Appointments this day', response.data)
+              // console.log('Appointments this day', response.data)
               const ampm = response.data.map((tm) => {
                 let H = tm.substr(0, 2)
                 let h = H % 12 || 12
@@ -86,12 +86,12 @@ export default function ResponsiveGrid(props) {
                 tm = h + tm.substr(2, 3) + ampm
                 return tm
               })
-              console.log('ampm', ampm)
+              // console.log('ampm', ampm)
               setReserved(ampm)
             }
           })
       } catch (err) {
-        console.log('e', err.message)
+        // console.log('e', err.message)
         setReserved(null);
       }
     }

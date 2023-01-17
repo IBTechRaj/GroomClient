@@ -29,9 +29,9 @@ const ForgotPassword = () => {
 
     const handleSubmitForgotPassword = async (event) => {
         event.preventDefault();
-        const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/forgot_password` : `http://localhost:3001/forgot_password`
+        const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/forgot_password` : `http://localhost:3001/forgot_password`
 
-        console.log('forgot 1', forgotUrl)
+        // console.log('forgot 1', forgotUrl)
 
         try {
             fetch(forgotUrl, {
@@ -43,7 +43,7 @@ const ForgotPassword = () => {
             })
                 .then((res) => {
                     if (res.status == 200) {
-                        console.log("forgot email posted", res)
+                        // console.log("forgot email posted", res)
                         alert('Password reset link sent to your email');
                         history.push('/')
 
@@ -56,12 +56,12 @@ const ForgotPassword = () => {
 
                 })
                 .then((data) => {
-                    console.log('d', data)
+                    // console.log('d', data)
                 })
                 .then((json) => console.dir(json))
         }
         catch (error) {
-            console.log('Err: ', error);
+            // console.log('Err: ', error);
         }
     }
 
