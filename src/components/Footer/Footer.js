@@ -15,7 +15,7 @@ function Footer() {
       <div className='social-media-wrap'>
         <div className='footer-logo'>
           <Link to='/' className='social-logo'>
-          <img src="assets/SeekPng.com_group-silhouette-png_508662.png" alt="NoImg" style={{width: 50, height: 50}}/>
+            <img src="assets/SeekPng.com_group-silhouette-png_508662.png" alt="NoImg" style={{ width: 50, height: 50 }} />
             {/* <MdLocalCarWash className='navbar-icon' style={{ fontSize: 24 }} /> */}
             GroomWell
           </Link>
@@ -33,7 +33,7 @@ function Footer() {
           <Link
             className='social-icon-link'
             to={
-              '//www.youtube.com/channel/UCsKsymTY_4BYR-wytLjex7A?view_as=subscriber'
+              '/'
             }
             target='_blank'
             aria-label='Youtube'

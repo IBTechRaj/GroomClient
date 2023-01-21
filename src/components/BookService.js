@@ -64,7 +64,7 @@ export default function Elevation(props) {
         + "\nSalon Phone : " + props.salonLandline
         + "\nSalon Mobile : " + props.salonMobile
         + "\n\n"
-        + "Kindly reach the salon at least 15 minutes before appoint time. For any queries please call Customer Care."
+        + "Kindly reach the salon at least 15 minutes before appointed time. For any queries please call Customer Care."
         + "\n\n"
         + "Team GroomWell"
     }

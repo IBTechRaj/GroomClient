@@ -197,7 +197,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
         "email": form.email,
         "message":
           "Dear " + form.firstName
-          + ",\n\n"
+          + ",\<br\>"
           + "Thank you for registering with GroomWell Services. Now you can login and choose from a large number of salons or services\n"
           + "For any queries please call Customer Care."
           + "\n\n"
