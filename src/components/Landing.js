@@ -51,7 +51,7 @@ function Landing(props) {
   return (
     <>
 
-      <h2> Choose Your Salon to Book Your Service</h2>
+      <h4 className='text-center'> Choose Your Salon to Book Your Service</h4>
       {
         content = salons.length === 0 ? (
           <div>

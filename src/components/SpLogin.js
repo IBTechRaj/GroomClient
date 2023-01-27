@@ -1,9 +1,12 @@
 // Form Validation Library : https://www.npmjs.com/package/react-form-input-validation
 // https://www.npmjs.com/package/validatorjs
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap'
 import axios from 'axios';
 import { Modal } from 'react-responsive-modal';
+import { IconContext } from 'react-icons/lib';
+import { HashLink as Link } from 'react-router-hash-link';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import 'react-responsive-modal/styles.css';
 
 import { Lang, useFormInputValidation } from "react-form-input-validation";
@@ -53,6 +56,10 @@ function SpLogin(props) {
   const [click, setClick] = useState(false);
   const [openSpLogin, setOpenSpLogin] = useState(false);
   const [openSpSignup, setOpenSpSignup] = useState(false);
+  const [button, setButton] = useState(true);
+  const handleClick = () => setClick(!click);
+
+  const closeMobileMenu = () => setClick(false);
 
   const onOpenSpLoginModal = () => {
     setOpenSpLogin(true);
@@ -83,6 +90,21 @@ function SpLogin(props) {
     "usertype": 1
 
   }
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setButton(!button);
+    } else {
+      setButton(!button);
+    }
+  };
+
+  useEffect(() => {
+    showButton();
+    window.addEventListener('resize', showButton);
+    return (
+      window.removeEventListener('resize', showButton)
+    )
+  }, []);
 
   const handleSubmitSpSignup = async (event) => {
     event.preventDefault();
@@ -441,8 +463,17 @@ function SpLogin(props) {
           </form>
         </Modal >
 
-        <Container className="container " >
-          <Row className="row align-middle ">
+        {/* <Container className="container " > */}
+        <IconContext.Provider value={{ color: '#fc0703' }}>
+          <nav className='navbar'>
+            {/* <Row className="row-fluid align-middle "> */}
+            <Link to='/' onClick={closeMobileMenu}>
+              {/* <img src="assets/SeekPng.com_group-silhouette-png_508662.png" alt="NoImg" style={{ width: 50, height: 50, color: 'red' }} /> */}
+              {/* <p style={{ fontSize: 30, fontWeight: 900, color: '#9d55e6' }}>GroomWell</p> */}
+            </Link>
+            <div className='menu-icon' onClick={handleClick}>
+              {click ? <FaTimes /> : <FaBars />}
+            </div>
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
               <p style={{ fontSize: 12, fontWeight: 800, marginRight: 10, marginTop: 20 }}> if you are a Service Provider, please login here or register your salon</p>
               {(spLoggedIn) ? (
@@ -460,8 +491,10 @@ function SpLogin(props) {
                 <button className='nav-links' style={{ color: 'red', border: 'none' }} onClick={onOpenSpSignupModal}>Signup</button>
               </li>
             </ul>
-          </Row>
-        </Container>
+            {/* </Row> */}
+          </nav>
+        </IconContext.Provider>
+        {/* </Container> */}
       </div>
     </>
   )

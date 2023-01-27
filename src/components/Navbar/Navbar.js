@@ -409,8 +409,8 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
   return (
     <>
-      <IconContext.Provider value={{ color: '#fff' }}>
-        <nav className='navbar'>
+      <IconContext.Provider value={{ color: '#6e6767' }}>
+        <nav className='navbar my-3'>
           <div className='navbar-container container'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
               <img src="assets/SeekPng.com_group-silhouette-png_508662.png" alt="NoImg" style={{ width: 50, height: 50 }} />
