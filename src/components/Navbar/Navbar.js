@@ -423,7 +423,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
 
               <li className='nav-item'>
-                <Link to='/' className='nav-links' style={{ color: 'black' }} onClick={closeMobileMenu}>
+                <Link to='/' className='nav-links m-0' style={{ backgroundColor: '#fff', color: 'black' }} onClick={closeMobileMenu}>
                   Home
                 </Link>
               </li>
@@ -439,17 +439,17 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
               </li>
               {(loggedIn) ? (
                 <li>
-                  <button className='nav-links' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={handleLogout}>Logout</button>
+                  <button className='nav-links m-0' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={handleLogout}>Logout</button>
                 </li>
               )
                 : (
                   <li>
-                    <button className='nav-links' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={onOpenLoginModal}>Login</button>
+                    <button className='nav-links m-0' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={onOpenLoginModal}>Login</button>
                   </li>
                 )
               }
               <li>
-                <button className='nav-links' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={onOpenSignupModal}>Signup</button>
+                <button className='nav-links m-0' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={onOpenSignupModal}>Signup</button>
               </li>
             </ul>
 
