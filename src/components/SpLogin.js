@@ -471,23 +471,24 @@ function SpLogin(props) {
               {/* <img src="assets/SeekPng.com_group-silhouette-png_508662.png" alt="NoImg" style={{ width: 50, height: 50, color: 'red' }} /> */}
               {/* <p style={{ fontSize: 30, fontWeight: 900, color: '#9d55e6' }}>GroomWell</p> */}
             </Link>
+
+            <p style={{ fontSize: 12, fontWeight: 800, marginRight: 10, marginTop: 20 }}> if you are a Service Provider, please Login here or Signup to register your salon</p>
+
             <div className='menu-icon' onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
             </div>
-            <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-              <p style={{ fontSize: 12, fontWeight: 800, marginRight: 10, marginTop: 20 }}> if you are a Service Provider, please Login here or Signup to register your salon</p>
-              {(spLoggedIn) ? (
-                <li>
-                  <button className='nav-links' style={{ color: 'red', border: 'none' }} onClick={handleSpLogout}>Logout</button>
+            <ul className={click ? 'nav-menu active' : 'nav-menu'}> {(spLoggedIn) ? (
+              <li className='nav-item'>
+                <button className='nav-links' style={{ color: 'red', border: 'none' }} onClick={handleSpLogout}>Logout</button>
+              </li>
+            )
+              : (
+                <li className='nav-item'>
+                  <button className='nav-links' style={{ color: 'red', border: 'none' }} onClick={onOpenSpLoginModal}>Login</button>
                 </li>
               )
-                : (
-                  <li>
-                    <button className='nav-links' style={{ color: 'red', border: 'none' }} onClick={onOpenSpLoginModal}>Login</button>
-                  </li>
-                )
-              }
-              <li>
+            }
+              <li className='nav-item'>
                 <button className='nav-links' style={{ color: 'red', border: 'none' }} onClick={onOpenSpSignupModal}>Signup</button>
               </li>
             </ul>

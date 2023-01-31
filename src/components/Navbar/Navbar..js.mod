@@ -448,23 +448,23 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
               {click ? <FaTimes /> : <FaBars />}
             </div>
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-              <li className='nav-item'>
+              <li>
                 <Link to='/' className='nav-links m-0' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={closeMobileMenu}>
                   Home
                 </Link>
               </li>
               {(loggedIn) ? (
-                <li className='nav-item'>
+                <li>
                   <button className='nav-links m-0' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={handleLogout}>Logout</button>
                 </li>
               )
                 : (
-                  <li className='nav-item'>
+                  <li>
                     <button className='nav-links m-0' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={onOpenLoginModal}>Login</button>
                   </li>
                 )
               }
-              <li className='nav-item'>
+              <li>
                 <button className='nav-links m-0' style={{ backgroundColor: '#fff', border: 'none', color: 'black' }} onClick={onOpenSignupModal}>Signup</button>
               </li>
             </ul>
