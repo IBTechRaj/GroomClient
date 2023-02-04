@@ -115,11 +115,11 @@ function SpLogin(props) {
     if (password === passwordConfirmation) {
       const emailData = {
         "subject": 'Service Provider Registration Success!',
-        "name": firstName,
-        "email": email,
+        "name": fields.firstName,
+        "email": fields.email_address,
         "message":
           "Dear " +
-          firstName +
+          fields.firstName +
           ",\n\n" +
           "Thank you for registering with GroomWell Services. Now you can login and fill the details of your Salon and Services\n"
           + "For any queries please call Customer Care." +
@@ -176,11 +176,11 @@ function SpLogin(props) {
           setSpId(cur_user_id)
           // console.log('sp md', signupData);
           const jwt = localStorage.getItem('token')
-          const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/contacts` : `http://localhost:3001/contacts`
+          const spcontactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/spcontacts` : `http://localhost:3001/spcontacts`
 
 
           try {
-            const res = axios.post(contactsUrl, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
+            const res = axios.post(spcontactsUrl, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
             // console.log('res', res);
           }
           catch (error) {
@@ -472,7 +472,7 @@ function SpLogin(props) {
               {/* <p style={{ fontSize: 30, fontWeight: 900, color: '#9d55e6' }}>GroomWell</p> */}
             </Link>
 
-            <p style={{ fontSize: 12, fontWeight: 800, marginRight: 10, marginTop: 20 }}> if you are a Service Provider, please Login here or Signup to register your salon</p>
+            <p style={{ fontSize: 12, fontWeight: 800, marginRight: 10, marginTop: 20 }}> Salon Owners, please Login here or Signup to register your salon</p>
 
             <div className='menu-icon' onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}

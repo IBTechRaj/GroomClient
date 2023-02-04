@@ -33,7 +33,7 @@ const lightTheme = createTheme({ palette: { mode: 'light' } });
 
 export default function Elevation(props) {
 
-  // console.log('ele props', props)
+  console.log('ele props', props)
   const [service, setService] = useState('Choose Service')
   const [showTime, setShowTime] = useState(false)
   const [apptDate, setApptDate] = useState()
@@ -53,6 +53,12 @@ export default function Elevation(props) {
       "subject": 'Appointment Booking Success!',
       "name": props.clientName,
       "email": props.clientEmail,
+      "start_date": startDate,
+      "appt_time": apptTime,
+      "service": service,
+      "salon_name": props.salonName,
+      "salon_phone": props.salonLandline,
+      "salon_mobile": props.salonMobile,
       "message":
         "Dear " + props.clientName
         + ",\n\n"
@@ -70,8 +76,13 @@ export default function Elevation(props) {
     }
     const emailSpData = {
       "subject": 'You have new business!',
-      "name": props.salonName,
+      "name": props.clientName,
       "email": props.salonEmail,
+      "start_date": startDate,
+      "appt_time": apptTime,
+      "service": service,
+      "salon_name": props.salonName,
+      "salon_mobile": props.clientMobile,
       "message":
         "Dear " + props.salonName
         + ",\n\n"
@@ -109,30 +120,28 @@ export default function Elevation(props) {
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/contacts` : `http://localhost:3001/contacts`
-        // const contactsUrl = 'https://groomserver.herokuapp.com/contacts'
+        const bookingEmailsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/bookingmailers` : `http://localhost:3001/bookingmailers`
 
         try {
-          const res = axios.post(contactsUrl, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
-          // console.log('res', res);
+          const res = axios.post(bookingEmailsUrl, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
+
         }
         catch (error) {
-          // console.log('cl eml err', error);
+
         }
 
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const contactsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/contacts` : `http://localhost:3001/contacts`
-        // const contactsUrl = 'https://groomserver.herokuapp.com/contacts'
+        const spbookingEmailsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/spbookingmailers` : `http://localhost:3001/spbookingmailers`
 
         try {
-          const res = axios.post(contactsUrl, emailSpData, { headers: { Authorization: `Bearer ${jwt}` } });
-          // console.log('res', res);
+          const res = axios.post(spbookingEmailsUrl, emailSpData, { headers: { Authorization: `Bearer ${jwt}` } });
+
           props.setBookingVisible(false)
         }
         catch (error) {
-          // console.log('sp eml err', error);
+
         }
 
       })
