@@ -280,40 +280,40 @@ function SpLogin(props) {
             autoComplete="off"
             onSubmit={handleSubmitSpLogin}
           >
-            <p>
-              <label>
-                Email
-                <input
-                  type="email"
-                  name="email_address"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.email_address}
-                />
-              </label>
-              <label className="error">
-                {errors.email_address ? errors.email_address : ""}
-              </label>
-            </p>
-            <p>
-              <label>
-                Password
-                <input
-                  type="password"
-                  name="password"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.password}
-                />
-              </label>
-              <label className="error">
-                {errors.password ? errors.password : ""}
-              </label>
-            </p>
 
-            <p>
-              <button type="submit">Login</button>
-            </p>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email_address"
+                onBlur={form.handleBlurEvent}
+                onChange={form.handleChangeEvent}
+                value={fields.email_address}
+              />
+            </label>
+            <label className="error">
+              {errors.email_address ? errors.email_address : ""}
+            </label>
+
+
+            <label>
+              Password
+              <input
+                type="password"
+                name="password"
+                onBlur={form.handleBlurEvent}
+                onChange={form.handleChangeEvent}
+                value={fields.password}
+              />
+            </label>
+            <label className="error">
+              {errors.password ? errors.password : ""}
+            </label>
+
+
+
+            <button type="submit">Login</button>
+
           </form>
         </Modal>
 
@@ -325,141 +325,141 @@ function SpLogin(props) {
             autoComplete="off"
             onSubmit={handleSubmitSpSignup}
           >
-            <p>
-              <label>
-                Email
-                <input
-                  type="email"
-                  name="email_address"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.email_address}
-                />
-              </label>
-              <label className="error">
-                {errors.email_address ? errors.email_address : ""}
-              </label>
-            </p>
-            <p>
-              <label>
-                Password
-                <input
-                  type="password"
-                  name="password"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.password}
-                />
-              </label>
-              <label className="error">
-                {errors.password ? errors.password : ""}
-              </label>
-            </p>
 
-            <p>
-              <label>
-                Confirm Password
-                <input
-                  type="password"
-                  name="password_confirmation"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.password_confirmation}
-                />
-              </label>
-              <label className="error">
-                {errors.password_confirmation ? errors.password_confirmation : ""}
-              </label>
-            </p>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email_address"
+                onBlur={form.handleBlurEvent}
+                onChange={form.handleChangeEvent}
+                value={fields.email_address}
+              />
+            </label>
+            <label className="error">
+              {errors.email_address ? errors.email_address : ""}
+            </label>
 
-            <p>
-              <label>
-                First Name
-                <input
-                  type="text"
-                  name="firstName"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.firstName}
-                />
-              </label>
-              <label className="error">
-                {errors.firstName ? errors.firstName : ""}
-              </label>
-            </p>
 
-            <p>
-              <label>
-                Last Name
-                <input
-                  type="text"
-                  name="lastName"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.lastName}
-                />
-              </label>
-              <label className="error">
-                {errors.lastName ? errors.lastName : ""}
-              </label>
-            </p>
+            <label>
+              Password
+              <input
+                type="password"
+                name="password"
+                onBlur={form.handleBlurEvent}
+                onChange={form.handleChangeEvent}
+                value={fields.password}
+              />
+            </label>
+            <label className="error">
+              {errors.password ? errors.password : ""}
+            </label>
 
-            <p>
-              <label>
-                Gender
-                <select
-                  id="gender"
-                  name="gender"
-                  value={fields.gender}
-                  onChange={form.handleChangeEvent}
-                  onBlur={form.handleBlurEvent}
-                >
-                  <option value="">Select </option>
-                  <option value="0">Female</option>
-                  <option value="1">Male</option>
-                  <option value="2">Other</option>
-                </select>
-              </label>
-              <label className="error">
-                {errors.gender ? errors.gender : ""}
-              </label>
-            </p>
 
-            <p>
-              <label>
-                Date of Birth
-                <input
-                  type="date"
-                  name="dob"
-                  onChange={form.handleChangeEvent}
-                  onBlur={form.handleBlurEvent}
-                  value={fields.dob}
-                />
-              </label>
-              <label className="error">
-                {errors.dob ? errors.dob : ""}
-              </label>
-            </p>
 
-            <p>
-              <label>
-                Mobile
-                <input
-                  type="tel"
-                  name="mobile"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                  value={fields.mobile}
-                />
-              </label>
-              <label className="error">
-                {errors.mobile ? errors.mobile : ""}
-              </label>
-            </p>
+            <label>
+              Confirm Password
+              <input
+                type="password"
+                name="password_confirmation"
+                onBlur={form.handleBlurEvent}
+                onChange={form.handleChangeEvent}
+                value={fields.password_confirmation}
+              />
+            </label>
+            <label className="error">
+              {errors.password_confirmation ? errors.password_confirmation : ""}
+            </label>
 
-            <p>
-              <button type="submit">Signup</button>
-            </p>
+
+
+            <label>
+              First Name
+              <input
+                type="text"
+                name="firstName"
+                onBlur={form.handleBlurEvent}
+                onChange={form.handleChangeEvent}
+                value={fields.firstName}
+              />
+            </label>
+            <label className="error">
+              {errors.firstName ? errors.firstName : ""}
+            </label>
+
+
+
+            <label>
+              Last Name
+              <input
+                type="text"
+                name="lastName"
+                onBlur={form.handleBlurEvent}
+                onChange={form.handleChangeEvent}
+                value={fields.lastName}
+              />
+            </label>
+            <label className="error">
+              {errors.lastName ? errors.lastName : ""}
+            </label>
+
+
+
+            <label>
+              Gender
+              <select
+                id="gender"
+                name="gender"
+                value={fields.gender}
+                onChange={form.handleChangeEvent}
+                onBlur={form.handleBlurEvent}
+              >
+                <option value="">Select </option>
+                <option value="0">Female</option>
+                <option value="1">Male</option>
+                <option value="2">Other</option>
+              </select>
+            </label>
+            <label className="error">
+              {errors.gender ? errors.gender : ""}
+            </label>
+
+
+
+            <label>
+              Date of Birth
+              <input
+                type="date"
+                name="dob"
+                onChange={form.handleChangeEvent}
+                onBlur={form.handleBlurEvent}
+                value={fields.dob}
+              />
+            </label>
+            <label className="error">
+              {errors.dob ? errors.dob : ""}
+            </label>
+
+
+
+            <label>
+              Mobile
+              <input
+                type="tel"
+                name="mobile"
+                onBlur={form.handleBlurEvent}
+                onChange={form.handleChangeEvent}
+                value={fields.mobile}
+              />
+            </label>
+            <label className="error">
+              {errors.mobile ? errors.mobile : ""}
+            </label>
+
+
+
+            <button type="submit">Signup</button>
+
           </form>
         </Modal >
 
@@ -469,10 +469,10 @@ function SpLogin(props) {
             {/* <Row className="row-fluid align-middle "> */}
             <Link to='/' onClick={closeMobileMenu}>
               {/* <img src="assets/SeekPng.com_group-silhouette-png_508662.png" alt="NoImg" style={{ width: 50, height: 50, color: 'red' }} /> */}
-              {/* <p style={{ fontSize: 30, fontWeight: 900, color: '#9d55e6' }}>GroomWell</p> */}
+
             </Link>
 
-            <p style={{ fontSize: 12, fontWeight: 800, marginRight: 10, marginTop: 20 }}> Salon Owners, please Login here or Signup to register your salon</p>
+            <div style={{ fontSize: 12, fontWeight: 800, marginRight: 10, marginTop: 20 }}> Salon Owners, please Login here or Signup to register your salon</div>
 
             <div className='menu-icon' onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}

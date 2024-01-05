@@ -57,12 +57,14 @@ export default function ResponsiveGrid(props) {
   const [reserved, setReserved] = useState([])
 
   const getApptTime = (tmslot) => {
+
+    // e.preventDefault()
     if (reserved.includes(tmslot)) {
       alert('Already reserved')
     }
     else {
-      props.setApptTime(tmslot);
       props.setShowTime(false)
+      props.setApptTime(tmslot);
     }
   }
 
@@ -147,7 +149,7 @@ export default function ResponsiveGrid(props) {
               />
             </Box>
           </Typography>
-          <Typography divider component='div' variant='subtitle1' sx={{ textAlign: 'center' }}>Booked : Free</Typography>
+          <Typography component='div' variant='subtitle1' sx={{ textAlign: 'center' }}>Booked : Free</Typography>
           <Grid container columns={{ xs: 2, sm: 4, md: 6 }} sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
 
             {blocks.map((tmslot, index) => (

@@ -20,32 +20,19 @@ function Landing(props) {
   const { userId, userName, userEmail } = props
   const [salons, setSalons] = useState([])
   const classes = useStyles()
-  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/salons` : `http://localhost:3001/salons`
-  // const salonurl = 'http://localhost:3001/salons';
-  // const salonurl = 'https://groomserver.herokuapp.com/salons';
+  // const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/salons` : `http://localhost:3001/salons`
+  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomproj-production.up.railway.app/salons` : `http://localhost:3001/salons`
 
-  // const getSalonData = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       salonUrl
-  //     );
-  //     setSalons(response.data);
-  //     console.log('respd', response.data)
-  //   } catch (err) {
-  //     console.log('e', err.message)
-  //     setSalons(null);
-  //   } 
-  // }
+
+
 
   useEffect(() => {
     axios.get(salonUrl,
     )
       .then(({ data }) => {
         setSalons(data)
-        // console.log('cnt', salons.count)
       })
 
-    //  getSalonData()
   }, [])
 
   return (

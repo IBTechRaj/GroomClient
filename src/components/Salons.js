@@ -227,269 +227,269 @@ export default function Salons(props) {
         onSubmit={handleSubmit}
       >
 
-        <p>
-          <label>
-            Name of the Salon
-            <input
-              type="text"
-              name="name"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.name}
-            />
-          </label>
-          <label className="error">
-            {errors.name ? errors.name : ""}
-          </label>
-        </p>
 
-        <p>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.email}
-            />
-          </label>
-          <label className="error">
-            {errors.email ? errors.email : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            Address 1
-            <input
-              type="text"
-              name="address1"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.address1}
-            />
-          </label>
-          <label className="error">
-            {errors.address1 ? errors.address1 : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            Address 2
-            <input
-              type="text"
-              name="address2"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.address2}
-            />
-          </label>
-          <label className="error">
-            {errors.address2 ? errors.address2 : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            Pincode
-            <input
-              type="number"
-              name="pincode"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.pincode}
-            />
-          </label>
-          <label className="error">
-            {errors.pincode ? errors.pincode : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            City
-            <input
-              type="text"
-              name="city"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.city}
-            />
-          </label>
-          <label className="error">
-            {errors.city ? errors.city : ""}
-          </label>
-        </p>
-
-
-        <p>
-          <label>
-            Land Line (with STD )
-            <input
-              type="number"
-              name="landline"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.landline}
-            />
-          </label>
-          <label className="error">
-            {/* {errors.landline ? errors.landline : ""} */}
-          </label>
-        </p>
+        <label>
+          Name of the Salon
+          <input
+            type="text"
+            name="name"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.name}
+          />
+        </label>
+        <label className="error">
+          {errors.name ? errors.name : ""}
+        </label>
 
 
 
-        <p>
-          <label>
-            Mobile
-            <input
-              type="tel"
-              name="mobile"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.mobile}
-            />
-          </label>
-          <label className="error">
-            {errors.mobile ? errors.mobile : ""}
-          </label>
-        </p>
-        <p>
-          <label>
-            GST (15 dig)
-            <input
-              type="text"
-              name="gst"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.gst}
-            />
-          </label>
-          <label className="error">
-            {errors.gst ? errors.gst : ""}
-          </label>
-        </p>
+        <label>
+          Email
+          <input
+            type="email"
+            name="email"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.email}
+          />
+        </label>
+        <label className="error">
+          {errors.email ? errors.email : ""}
+        </label>
 
-        <p>
-          <label>
-            PAN (10 dig)
-            <input
-              type="text"
-              name="pan"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.pan}
-            />
-          </label>
-          <label className="error">
-            {errors.pan ? errors.pan : ""}
-          </label>
-        </p>
 
-        <p>
-          <label>
-            Chairs
-            <input
-              type="number"
-              name="chairs"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.chairs}
-            />
-          </label>
-          <label className="error">
-            {errors.chairs ? errors.chairs : ""}
-          </label>
-        </p>
-        <p>
-          <label>
-            Opens
-            <input
-              type="time"
-              name="opens"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.opens}
-            />
-          </label>
-          <label className="error">
-            {errors.opens ? errors.opens : ""}
-          </label>
-        </p>
 
-        <p>
-          <label>
-            Closes
-            <input
-              type="time"
-              name="closes"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.closes}
-            />
-          </label>
-          <label className="error">
-            {errors.closes ? errors.closes : ""}
-          </label>
-        </p>
+        <label>
+          Address 1
+          <input
+            type="text"
+            name="address1"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.address1}
+          />
+        </label>
+        <label className="error">
+          {errors.address1 ? errors.address1 : ""}
+        </label>
 
-        <p>
-          <label>
-            Weekly Holiday
-            <select
-              id="holiday"
-              name="holiday"
-              value={fields.holiday}
-              onChange={form.handleChangeEvent}
-              onBlur={form.handleBlurEvent}
-            >
-              <option value="">Select</option>
-              <option value={1}>Sunday</option>
-              <option value={2}>Monday</option>
-              <option value={3}>Tuesday</option>
-              <option value={4}>Wednesday</option>
-              <option value={5}>Thursday</option>
-              <option value={6}>Friday</option>
-              <option value={7}>Saturday</option>
-            </select>
-          </label>
-          <label className="error">
-            {errors.holiday ? errors.holiday : ""}
-          </label>
-        </p>
 
-        <p>
-          <label>
-            Image Upload
-            <input type="file"
-              accept="image/*"
-              multiple={false}
-              onChange={onImageChange}
-            />
-          </label>
-          {/* <label className="error">
+
+        <label>
+          Address 2
+          <input
+            type="text"
+            name="address2"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.address2}
+          />
+        </label>
+        <label className="error">
+          {errors.address2 ? errors.address2 : ""}
+        </label>
+
+
+
+        <label>
+          Pincode
+          <input
+            type="number"
+            name="pincode"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.pincode}
+          />
+        </label>
+        <label className="error">
+          {errors.pincode ? errors.pincode : ""}
+        </label>
+
+
+
+        <label>
+          City
+          <input
+            type="text"
+            name="city"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.city}
+          />
+        </label>
+        <label className="error">
+          {errors.city ? errors.city : ""}
+        </label>
+
+
+
+
+        <label>
+          Land Line (with STD )
+          <input
+            type="number"
+            name="landline"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.landline}
+          />
+        </label>
+        <label className="error">
+          {/* {errors.landline ? errors.landline : ""} */}
+        </label>
+
+
+
+
+
+        <label>
+          Mobile
+          <input
+            type="tel"
+            name="mobile"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.mobile}
+          />
+        </label>
+        <label className="error">
+          {errors.mobile ? errors.mobile : ""}
+        </label>
+
+
+        <label>
+          GST (15 dig)
+          <input
+            type="text"
+            name="gst"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.gst}
+          />
+        </label>
+        <label className="error">
+          {errors.gst ? errors.gst : ""}
+        </label>
+
+
+
+        <label>
+          PAN (10 dig)
+          <input
+            type="text"
+            name="pan"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.pan}
+          />
+        </label>
+        <label className="error">
+          {errors.pan ? errors.pan : ""}
+        </label>
+
+
+
+        <label>
+          Chairs
+          <input
+            type="number"
+            name="chairs"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.chairs}
+          />
+        </label>
+        <label className="error">
+          {errors.chairs ? errors.chairs : ""}
+        </label>
+
+
+        <label>
+          Opens
+          <input
+            type="time"
+            name="opens"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.opens}
+          />
+        </label>
+        <label className="error">
+          {errors.opens ? errors.opens : ""}
+        </label>
+
+
+
+        <label>
+          Closes
+          <input
+            type="time"
+            name="closes"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.closes}
+          />
+        </label>
+        <label className="error">
+          {errors.closes ? errors.closes : ""}
+        </label>
+
+
+
+        <label>
+          Weekly Holiday
+          <select
+            id="holiday"
+            name="holiday"
+            value={fields.holiday}
+            onChange={form.handleChangeEvent}
+            onBlur={form.handleBlurEvent}
+          >
+            <option value="">Select</option>
+            <option value={1}>Sunday</option>
+            <option value={2}>Monday</option>
+            <option value={3}>Tuesday</option>
+            <option value={4}>Wednesday</option>
+            <option value={5}>Thursday</option>
+            <option value={6}>Friday</option>
+            <option value={7}>Saturday</option>
+          </select>
+        </label>
+        <label className="error">
+          {errors.holiday ? errors.holiday : ""}
+        </label>
+
+
+
+        <label>
+          Image Upload
+          <input type="file"
+            accept="image/*"
+            multiple={false}
+            onChange={onImageChange}
+          />
+        </label>
+        {/* <label className="error">
             {errors.closes ? errors.closes : ""}
           </label> */}
-        </p>
 
-        <p>
-          <button type="submit"
-            disabled={salonsBtn}
-          >
-            Submit Salon Details</button>
-        </p>
 
-        <p>
-          <button
-            type="submit"
-            onClick={onClose}
-          >
-            Exit
-          </button>
-        </p>
+
+        <button type="submit"
+          disabled={salonsBtn}
+        >
+          Submit Salon Details</button>
+
+
+
+        <button
+          type="submit"
+          onClick={onClose}
+        >
+          Exit
+        </button>
+
       </form>
 
       {/* <Container component="main" maxWidth="xs">

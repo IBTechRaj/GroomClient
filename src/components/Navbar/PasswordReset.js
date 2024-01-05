@@ -63,7 +63,7 @@ const PasswordReset = () => {
     return (
         <>
             <h1 className='text-center py-3'>Reset Password:</h1>
-            {/* <Center> */}
+
             <div
                 style={{
                     display: 'flex',
@@ -96,8 +96,7 @@ const PasswordReset = () => {
                             setPassword(event.target.value)
                         }}
                         name="password" placeholder="New Password" type="password" value={password} />
-                    {/* <p>Set your new password here.</p> */}
-                    {/* <label for="password_confirmation">Confirm new password:</label> */}
+
                     <input
                         className="form-control py-2" required id="password_confirmation" onChange={event => {
                             setPasswordConfirmation(event.target.value)
@@ -106,7 +105,7 @@ const PasswordReset = () => {
                     {/* <button type="secondary">Reset Password</button> */}
                 </form>
             </div>
-            {/* </Center> */}
+
         </>
     )
 }

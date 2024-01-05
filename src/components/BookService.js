@@ -33,8 +33,8 @@ const lightTheme = createTheme({ palette: { mode: 'light' } });
 
 export default function Elevation(props) {
 
-  console.log('ele props', props)
-  const [service, setService] = useState('Choose Service')
+  // console.log('ele props', props)
+  const [service, setService] = useState('')
   const [showTime, setShowTime] = useState(false)
   const [apptDate, setApptDate] = useState()
   const [apptTime, setApptTime] = useState('0:00')
@@ -49,104 +49,109 @@ export default function Elevation(props) {
 
   const createAppointment = (e) => {
     e.preventDefault()
-    const emailClientData = {
-      "subject": 'Appointment Booking Success!',
-      "name": props.clientName,
-      "email": props.clientEmail,
-      "start_date": startDate,
-      "appt_time": apptTime,
-      "service": service,
-      "salon_name": props.salonName,
-      "salon_phone": props.salonLandline,
-      "salon_mobile": props.salonMobile,
-      "message":
-        "Dear " + props.clientName
-        + ",\n\n"
-        + "Thank you for booking your service with GroomWell Services partner. The following are the details of your appointment\n"
-        + "\nAppointment Date :" + startDate
-        + "\nAppointment Time : " + apptTime
-        + "\nService Name: " + service
-        + "\nSalon Name: " + props.salonName
-        + "\nSalon Phone : " + props.salonLandline
-        + "\nSalon Mobile : " + props.salonMobile
-        + "\n\n"
-        + "Kindly reach the salon at least 15 minutes before appointed time. For any queries please call Customer Care."
-        + "\n\n"
-        + "Team GroomWell"
+    if (apptTime === '0:00' || service === '') {
+      alert('Please fill all the required details')
     }
-    const emailSpData = {
-      "subject": 'You have new business!',
-      "name": props.clientName,
-      "email": props.salonEmail,
-      "start_date": startDate,
-      "appt_time": apptTime,
-      "service": service,
-      "salon_name": props.salonName,
-      "salon_mobile": props.clientMobile,
-      "message":
-        "Dear " + props.salonName
-        + ",\n\n"
-        + "We are glad to inform you that one client has booked his service through us at your salon. The following are the details of your appointment\n"
-        + "\nAppointment Date :" + startDate
-        + "\nAppointment Time : " + apptTime
-        + "\nCustomer Name : " + props.clientName
-        + "\nCustomer Mobile : " + props.clientMobile
-        + "\nService booked : " + service
-        + "\n\n"
-        + "Kindly call the customer preferably a day before and confirm the appointment. For any queries please call Customer Care."
-        + "\n\n"
-        + "Team GroomWell"
+    else {
+      // { setShowTime(false) }
+      const emailClientData = {
+        "subject": 'Appointment Booking Success!',
+        "name": props.clientName,
+        "email": props.clientEmail,
+        "start_date": startDate,
+        "appt_time": apptTime,
+        "service": service,
+        "salon_name": props.salonName,
+        "salon_phone": props.salonLandline,
+        "salon_mobile": props.salonMobile,
+        "message":
+          "Dear " + props.clientName
+          + ",\n\n"
+          + "Thank you for booking your service with GroomWell Services partner. The following are the details of your appointment\n"
+          + "\nAppointment Date :" + startDate
+          + "\nAppointment Time : " + apptTime
+          + "\nService Name: " + service
+          + "\nSalon Name: " + props.salonName
+          + "\nSalon Phone : " + props.salonLandline
+          + "\nSalon Mobile : " + props.salonMobile
+          + "\n\n"
+          + "Kindly reach the salon at least 15 minutes before appointed time. For any queries please call Customer Care."
+          + "\n\n"
+          + "Team GroomWell"
+      }
+      const emailSpData = {
+        "subject": 'You have new business!',
+        "name": props.clientName,
+        "email": props.salonEmail,
+        "start_date": startDate,
+        "appt_time": apptTime,
+        "service": service,
+        "salon_name": props.salonName,
+        "salon_mobile": props.clientMobile,
+        "message":
+          "Dear " + props.salonName
+          + ",\n\n"
+          + "We are glad to inform you that one client has booked his service through us at your salon. The following are the details of your appointment\n"
+          + "\nAppointment Date :" + startDate
+          + "\nAppointment Time : " + apptTime
+          + "\nCustomer Name : " + props.clientName
+          + "\nCustomer Mobile : " + props.clientMobile
+          + "\nService booked : " + service
+          + "\n\n"
+          + "Kindly call the customer preferably a day before and confirm the appointment. For any queries please call Customer Care."
+          + "\n\n"
+          + "Team GroomWell"
+      }
+      const appointment = {
+        apptdate: startDate,
+        appttime: apptTime,
+        service: service,
+        salon_id: props.salonId,
+        user_id: props.userId
+      }
+      // console.log('appt data', appointment)
+      const jwt = localStorage.getItem('token');
+      const apptUrl = (process.env.REACT_APP_SERVER ? `https://groomwell-backend.onrender.com/appointments` : `http://localhost:3001/appointments`)
+      // const apptUrl = 'https://groomserver.herokuapp.com/appointments';
+
+      axios.post(apptUrl, appointment, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+        .then(response => {
+          if (response.status === 201) {
+            alert('Your appointment successfully booked')
+            // console.log('Appointment Added')
+          }
+        })
+        .then(() => {
+          const jwt = localStorage.getItem('token')
+          const bookingEmailsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/bookingmailers` : `http://localhost:3001/bookingmailers`
+
+          try {
+            const res = axios.post(bookingEmailsUrl, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
+
+          }
+          catch (error) {
+
+          }
+
+        })
+        .then(() => {
+          const jwt = localStorage.getItem('token')
+          const spbookingEmailsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/spbookingmailers` : `http://localhost:3001/spbookingmailers`
+
+          try {
+            const res = axios.post(spbookingEmailsUrl, emailSpData, { headers: { Authorization: `Bearer ${jwt}` } });
+
+            props.setBookingVisible(false)
+          }
+          catch (error) {
+
+          }
+
+        })
     }
-    const appointment = {
-      apptdate: startDate,
-      appttime: apptTime,
-      service: service,
-      salon_id: props.salonId,
-      user_id: props.userId
-    }
-    // console.log('appt data', appointment)
-    const jwt = localStorage.getItem('token');
-    const apptUrl = (process.env.REACT_APP_SERVER ? `https://groomwell-backend.onrender.com/appointments` : `http://localhost:3001/appointments`)
-    // const apptUrl = 'https://groomserver.herokuapp.com/appointments';
-
-    axios.post(apptUrl, appointment, {
-      headers: { Authorization: `Bearer ${jwt}` },
-    })
-      .then(response => {
-        if (response.status === 201) {
-          alert('Your appointment successfully booked')
-          // console.log('Appointment Added')
-        }
-      })
-      .then(() => {
-        const jwt = localStorage.getItem('token')
-        const bookingEmailsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/bookingmailers` : `http://localhost:3001/bookingmailers`
-
-        try {
-          const res = axios.post(bookingEmailsUrl, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
-
-        }
-        catch (error) {
-
-        }
-
-      })
-      .then(() => {
-        const jwt = localStorage.getItem('token')
-        const spbookingEmailsUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/spbookingmailers` : `http://localhost:3001/spbookingmailers`
-
-        try {
-          const res = axios.post(spbookingEmailsUrl, emailSpData, { headers: { Authorization: `Bearer ${jwt}` } });
-
-          props.setBookingVisible(false)
-        }
-        catch (error) {
-
-        }
-
-      })
   }
-
   const [startDate, setStartDate] = useState(new Date());
   return (
     <Grid container spacing={2}>
@@ -166,14 +171,14 @@ export default function Elevation(props) {
                 sx={{ minWidth: 275 }}
               >
                 <CardContent>
-                  <Typography variant="h5" sx={{ mb: 1.5 }}
+                  <Typography component={'h1'} variant="h5" sx={{ mb: 1.5 }}
                   >
                     Booking Details
                   </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  <Typography component={'h3'} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Salon Name : {props.salonName}
                   </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  <Typography component={'h3'} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Service :
                     <select onChange={handleServiceChange}>
                       <option value="choose">
@@ -181,29 +186,30 @@ export default function Elevation(props) {
                       {props.services.map((service) => <option key={service.id} value={service.stype}>{service.stype}</option>)}
                     </select>
                   </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  <Typography component={'h3'} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Client : {props.clientName}
                   </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  <Typography component={'h3'} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Booking Date :
                     {/* <div> */}
-                    <Row >
-                      <Col xs={6} style={{ marginLeft: 200, position: 'absolute' }}>
+                    {/* <Row > */}
 
-                        {showTime ? <TimeSlots setApptTime={setApptTime} setShowTime={setShowTime} startDate={startDate} salonId={props.salonId} /> : null}
-                        {/* {console.log('dt,tm', startDate.toLocaleDateString(), apptTime)} */}
-                      </Col>
-                      <Col xs={6} >
-                        <DatePicker
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                          shouldCloseOnSelect={false}
-                          onSelect={setDateShowTime}
-                        />
-                      </Col>
+                    {/* <Col xs={6} > */}
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      shouldCloseOnSelect={false}
+                      onSelect={setDateShowTime}
+                    />
+                    {/* </Col> */}
+                    {/* <Col xs={6} style={{ marginLeft: 200, position: 'relative' }}> */}
 
-                    </Row>
+                    {showTime ? <TimeSlots setApptTime={setApptTime} setShowTime={setShowTime} startDate={startDate} salonId={props.salonId} /> : null}
+                    {/* {console.log('dt,tm', startDate.toLocaleDateString(), apptTime)} */}
+                    {/* </Col> */}
+                    {/* </Row> */}
                     {/* </div> */}
+
                   </Typography>
                   <Typography sx={{ fontSize: 14 }} color="text.secondary">
                     Booking Time : {apptTime}

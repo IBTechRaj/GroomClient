@@ -232,7 +232,8 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
           + "Team GroomWell"
       }
       // console.log('signing up', signupData)
-      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/signup` : `http://localhost:3001/signup`
+      // const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/signup` : `http://localhost:3001/signup`
+      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://groomproj-production.up.railway.app/signup` : `http://localhost:3001/signup`
       fetch(signUpUrl, {
         method: "post",
         headers: {
@@ -252,6 +253,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
         }),
       })
         .then((res) => {
+          console.log(res)
           if (res.ok) {
             // console.log('signedUp', res)
             // console.log(res.headers.get("Authorization"));
@@ -308,7 +310,8 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
 
 
     // console.log('logging', (process.env.REACT_APP_SERVER))
-    const loginUrl = (process.env.REACT_APP_SERVER ? `https://groomwell-backend.onrender.com/login` : `http://localhost:3001/login`)
+    // const loginUrl = (process.env.REACT_APP_SERVER ? `https://groomwell-backend.onrender.com/login` : `http://localhost:3001/login`)
+    const loginUrl = (process.env.REACT_APP_SERVER ? `https://groomproj-production.up.railway.app/login` : `http://localhost:3001/login`)
     // console.log('url', loginUrl)
     // console.log('server', process.env.REACT_APP_SERVER )
     fetch(loginUrl, {
@@ -324,6 +327,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
       }),
     })
       .then((res) => {
+        console.log(res)
         if (res.ok) {
           // console.log(res.headers.get("Authorization"));
           localStorage.setItem("token", res.headers.get("Authorization"));
@@ -782,7 +786,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
               }}
             /> */}
           Gender
-          <label>
+          <div>
             {/* Your Gender: */}
             <select
               className={clsx(
@@ -812,7 +816,7 @@ const Navbar = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserNam
                 {errors.gender.message}
               </p>
             ) : null}
-          </label>
+          </div>
           <div className={styles.formGroup}>
             <input
               className={clsx(

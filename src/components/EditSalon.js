@@ -202,306 +202,293 @@ export default function EditSalon(props) {
         onSubmit={updateSalonDetails}
       >
 
-        <p>
-          <label>
-            Name of the Salon
-            <input
-              type="text"
-              name="name"
 
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.name ? fields.name : salonData.name}
-            />
-          </label>
-          <label className="error">
-            {errors.name ? errors.name : ""}
-          </label>
-        </p>
+        <label>
+          Name of the Salon
+          <input
+            type="text"
+            name="name"
 
-        <p>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.email ? fields.email : salonData.email}
-            />
-          </label>
-          <label className="error">
-            {errors.email ? errors.email : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            Address 1
-            <input
-              type="text"
-              name="address1"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.address1 ? fields.address1 : salonData.address1}
-            />
-          </label>
-          <label className="error">
-            {errors.address1 ? errors.address1 : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            Address 2
-            <input
-              type="text"
-              name="address2"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.address2 ? fields.address2 : salonData.address2}
-            />
-          </label>
-          <label className="error">
-            {errors.address2 ? errors.address2 : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            Pincode
-            <input
-              type="number"
-              name="pincode"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.pincode ? fields.pincode : salonData.pincode}
-            />
-          </label>
-          <label className="error">
-            {errors.pincode ? errors.pincode : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            City
-            <input
-              type="text"
-              name="city"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.city ? fields.city : salonData.city}
-            />
-          </label>
-          <label className="error">
-            {errors.city ? errors.city : ""}
-          </label>
-        </p>
-
-
-        <p>
-          <label>
-            Land Line (with STD )
-            <input
-              type="number"
-              name="landline"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.landline ? fields.landline : salonData.landline}
-            />
-          </label>
-          <label className="error">
-            {/* {errors.landline ? errors.landline : ""} */}
-          </label>
-        </p>
-
-
-
-        <p>
-          <label>
-            Mobile
-            <input
-              type="tel"
-              name="mobile"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.mobile ? fields.mobile : salonData.mobile}
-            />
-          </label>
-          <label className="error">
-            {errors.mobile ? errors.mobile : ""}
-          </label>
-        </p>
-        <p>
-          <label>
-            GST (15 dig)
-            <input
-              type="text"
-              name="gstin"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.gstin ? fields.gstin : salonData.gstin}
-            />
-          </label>
-          <label className="error">
-            {errors.gstin ? errors.gstin : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            PAN (10 dig)
-            <input
-              type="text"
-              name="pan"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.pan ? fields.pan : salonData.pan}
-            />
-          </label>
-          <label className="error">
-            {errors.pan ? errors.pan : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            Chairs
-            <input
-              type="number"
-              name="chairs"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.chairs ? fields.chairs : salonData.chairs}
-            />
-          </label>
-          <label className="error">
-            {errors.chairs ? errors.chairs : ""}
-          </label>
-        </p>
-        <p>
-          <label>
-            Opens
-            <input
-              type="time"
-              name="opens"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.opens ? fields.opens : salonData.opens}
-            />
-          </label>
-          <label className="error">
-            {errors.opens ? errors.opens : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            Closes
-            <input
-              type="time"
-              name="closes"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              // onBlur={form.handleBlurEvent}
-              // onChange={handleInputChange}
-              value={fields.closes ? fields.closes : salonData.closes}
-            />
-          </label>
-          <label className="error">
-            {errors.closes ? errors.closes : ""}
-          </label>
-        </p>
-
-        <p>
-          <label>
-            Weekly Holiday
-            <select
-              id="weekday"
-              name="weekday"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-              value={fields.weekday ? fields.weekday : salonData.weekday}
-            // onChange={handleInputChange}
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
             // onBlur={form.handleBlurEvent}
-            >
-              <option value="">Select</option>
-              <option value={1}>Sunday</option>
-              <option value={2}>Monday</option>
-              <option value={3}>Tuesday</option>
-              <option value={4}>Wednesday</option>
-              <option value={5}>Thursday</option>
-              <option value={6}>Friday</option>
-              <option value={7}>Saturday</option>
-            </select>
-          </label>
-          <label className="error">
-            {errors.weekday ? errors.weekday : ""}
-          </label>
-        </p>
-        <p>
-          <label>
-            Image Upload
-            <input type="file"
-              accept="image/*"
-              multiple={false}
-              onChange={onImageChange}
-            />
-          </label>
-          {/* <label className="error">
-            {errors.closes ? errors.closes : ""}
-          </label> */}
-        </p>
-        {/* <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+            // onChange={handleInputChange}
+            value={fields.name ? fields.name : salonData.name}
+          />
+        </label>
+        <label className="error">
+          {errors.name ? errors.name : ""}
+        </label>
+
+
+
+        <label>
+          Email
+          <input
+            type="email"
+            name="email"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.email ? fields.email : salonData.email}
+          />
+        </label>
+        <label className="error">
+          {errors.email ? errors.email : ""}
+        </label>
+
+
+
+        <label>
+          Address 1
+          <input
+            type="text"
+            name="address1"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.address1 ? fields.address1 : salonData.address1}
+          />
+        </label>
+        <label className="error">
+          {errors.address1 ? errors.address1 : ""}
+        </label>
+
+
+
+        <label>
+          Address 2
+          <input
+            type="text"
+            name="address2"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.address2 ? fields.address2 : salonData.address2}
+          />
+        </label>
+        <label className="error">
+          {errors.address2 ? errors.address2 : ""}
+        </label>
+
+
+
+        <label>
+          Pincode
+          <input
+            type="number"
+            name="pincode"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.pincode ? fields.pincode : salonData.pincode}
+          />
+        </label>
+        <label className="error">
+          {errors.pincode ? errors.pincode : ""}
+        </label>
+
+
+
+        <label>
+          City
+          <input
+            type="text"
+            name="city"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.city ? fields.city : salonData.city}
+          />
+        </label>
+        <label className="error">
+          {errors.city ? errors.city : ""}
+        </label>
+
+
+
+        <label>
+          Land Line (with STD )
+          <input
+            type="number"
+            name="landline"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.landline ? fields.landline : salonData.landline}
+          />
+        </label>
+        <label className="error">
+          {/* {errors.landline ? errors.landline : ""} */}
+        </label>
+
+
+
+
+
+        <label>
+          Mobile
+          <input
+            type="tel"
+            name="mobile"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.mobile ? fields.mobile : salonData.mobile}
+          />
+        </label>
+        <label className="error">
+          {errors.mobile ? errors.mobile : ""}
+        </label>
+
+
+        <label>
+          GST (15 dig)
+          <input
+            type="text"
+            name="gstin"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.gstin ? fields.gstin : salonData.gstin}
+          />
+        </label>
+        <label className="error">
+          {errors.gstin ? errors.gstin : ""}
+        </label>
+
+
+
+        <label>
+          PAN (10 dig)
+          <input
+            type="text"
+            name="pan"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.pan ? fields.pan : salonData.pan}
+          />
+        </label>
+        <label className="error">
+          {errors.pan ? errors.pan : ""}
+        </label>
+
+
+
+        <label>
+          Chairs
+          <input
+            type="number"
+            name="chairs"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.chairs ? fields.chairs : salonData.chairs}
+          />
+        </label>
+        <label className="error">
+          {errors.chairs ? errors.chairs : ""}
+        </label>
+
+
+        <label>
+          Opens
+          <input
+            type="time"
+            name="opens"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.opens ? fields.opens : salonData.opens}
+          />
+        </label>
+        <label className="error">
+          {errors.opens ? errors.opens : ""}
+        </label>
+
+
+
+        <label>
+          Closes
+          <input
+            type="time"
+            name="closes"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            // onBlur={form.handleBlurEvent}
+            // onChange={handleInputChange}
+            value={fields.closes ? fields.closes : salonData.closes}
+          />
+        </label>
+        <label className="error">
+          {errors.closes ? errors.closes : ""}
+        </label>
+
+
+
+        <label>
+          Weekly Holiday
+          <select
+            id="weekday"
+            name="weekday"
+            onBlur={form.handleBlurEvent}
+            onChange={form.handleChangeEvent}
+            value={fields.weekday ? fields.weekday : salonData.weekday}
+          // onChange={handleInputChange}
+          // onBlur={form.handleBlurEvent}
+          >
+            <option value="">Select</option>
+            <option value={1}>Sunday</option>
+            <option value={2}>Monday</option>
+            <option value={3}>Tuesday</option>
+            <option value={4}>Wednesday</option>
+            <option value={5}>Thursday</option>
+            <option value={6}>Friday</option>
+            <option value={7}>Saturday</option>
+          </select>
+        </label>
+        <label className="error">
+          {errors.weekday ? errors.weekday : ""}
+        </label>
+
+
+        <label>
+          Image Upload
+          <input type="file"
+            accept="image/*"
+            multiple={false}
+            onChange={onImageChange}
+          />
+        </label>
+
+
+        <button type="submit"
+          // disabled={salonsBtn}
           onClick={updateSalonDetails}
         >
-          Update Salon
-        </Button> */}
-        <p>
-          <button type="submit"
-            // disabled={salonsBtn}
-            onClick={updateSalonDetails}
-          >
-            Update Salon  </button>
-        </p>
+          Update Salon  </button>
 
-        <p>
-          <button
-            type="submit"
-            onClick={onClose}
-          >
-            Exit
-          </button>
-        </p>
+
+
+        <button
+          type="submit"
+          onClick={onClose}
+        >
+          Exit
+        </button>
+
       </form>
     </>
   )
