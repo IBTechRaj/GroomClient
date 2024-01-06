@@ -20,8 +20,8 @@ function Landing(props) {
   const { userId, userName, userEmail } = props
   const [salons, setSalons] = useState([])
   const classes = useStyles()
-  // const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/salons` : `http://localhost:3001/salons`
-  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomproj-production.up.railway.app/salons` : `http://localhost:3001/salons`
+  const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/salons` : `http://localhost:3001/salons`
+  // const salonUrl = (process.env.REACT_APP_SERVER) ? `https://groomproj-production.up.railway.app/salons` : `http://localhost:3001/salons`
 
 
 
