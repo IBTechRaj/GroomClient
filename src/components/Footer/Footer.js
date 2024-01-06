@@ -56,6 +56,16 @@ function Footer() {
           >
             <FaLinkedin />
           </Link>
+          <Link
+            to={'/PrivacyPolicy'}
+            color='black'
+          // onClick={
+          //   onCloseLoginModal
+          // }
+          >
+            Privacy Policy
+          </Link>
+
         </div>
       </div>
     </div>
