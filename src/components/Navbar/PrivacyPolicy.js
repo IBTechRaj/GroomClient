@@ -28,43 +28,40 @@ const PrivacyPolicy = () => {
         );
     }
 
-    const handleSubmitForgotPassword = async (event) => {
-        event.preventDefault();
-        const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/forgot_password` : `http://localhost:3001/forgot_password`
+    // const handleSubmitForgotPassword = async (event) => {
+    //     event.preventDefault();
+    //     const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://groomwell-backend.onrender.com/forgot_password` : `http://localhost:3001/forgot_password`
 
-        // console.log('forgot 1', forgotUrl)
 
-        try {
-            fetch(forgotUrl, {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(emdata)
-            })
-                .then((res) => {
-                    if (res.status == 200) {
-                        // console.log("forgot email posted", res)
-                        alert('Password reset link sent to your email');
-                        history.push('/')
 
-                        return res.json();
-                    } else {
-                        alert('We could not find this email in our system');
-                        history.push('/')
-                        throw new Error(res);
-                    }
+    //     try {
+    //         fetch(forgotUrl, {
+    //             method: "post",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify(emdata)
+    //         })
+    //             .then((res) => {
+    //                 if (res.status == 200) {
+    //                     alert('Password reset link sent to your email');
+    //                     history.push('/')
 
-                })
-                .then((data) => {
-                    // console.log('d', data)
-                })
-                .then((json) => console.dir(json))
-        }
-        catch (error) {
-            // console.log('Err: ', error);
-        }
-    }
+    //                     return res.json();
+    //                 } else {
+    //                     alert('We could not find this email in our system');
+    //                     history.push('/')
+    //                     throw new Error(res);
+    //                 }
+
+    //             })
+    //             .then((data) => {
+    //             })
+    //             .then((json) => console.dir(json))
+    //     }
+    //     catch (error) {
+    //     }
+    // }
 
     return (
         <>
