@@ -10,6 +10,7 @@ import Footer from './components/Footer/Footer';
 // import SpLogin from './components/SpLogin'
 import Home from './components/Home';
 import ForgotPassword from './components/Navbar/ForgotPassword';
+import PrivacyPolicy from './components/Navbar/PrivacyPolicy';
 import PasswordReset from './components/Navbar/PasswordReset';
 
 
@@ -41,6 +42,7 @@ function App() {
           <Sprovider spId={spId} spSalonId={spSalonId} setSpSalonId={setSpSalonId} />
         } */}
         <Route exact path='/ForgotPassword' component={ForgotPassword} />
+        <Route exact path='/PrivacyPolicy' component={PrivacyPolicy} />
         <Route exact path='/PasswordReset' component={PasswordReset} />
       </Switch>
       <Footer />
